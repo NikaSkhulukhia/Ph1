@@ -5,10 +5,18 @@ public class Memory {
     private int volumeFree;
 
     public Memory(String brand, int capacity, int volumeUsed) {
-        this.brand = brand;
-        this.capacity = capacity;
-        this.volumeUsed = volumeUsed;
-        this.volumeFree = this.capacity - this.volumeUsed;
+        if (capacity == 0)
+            throw new IllegalArgumentException("capacity must be greater than zero!");
+        else if (volumeUsed < 0){
+            throw new IllegalArgumentException("volumeUsed must be greater or equal to zero!");
+        } else if (volumeUsed > capacity) {
+            throw new IllegalArgumentException("volumeUsed must be less or equal to total capacity!");
+        } else {
+            this.brand = brand;
+            this.capacity = capacity;
+            this.volumeUsed = volumeUsed;
+            this.volumeFree = this.capacity - this.volumeUsed;
+        }
     }
 
     public Memory(){
