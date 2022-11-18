@@ -1,13 +1,18 @@
 public class RAM {
     private String brand;
-    private int capacity;
+    private int capacity; // greater than zero. default 2
 
     public RAM(String brand, int capacity) {
-        this.brand = brand;
-        this.capacity = capacity;
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity must be greater than zero!");
+        } else {
+            this.brand = brand;
+            this.capacity = capacity;
+        }
     }
 
     public RAM() {
+        this.capacity = 2;
     }
 
     @Override
@@ -31,6 +36,10 @@ public class RAM {
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity must be greater than zero!");
+        } else {
+            this.capacity = capacity;
+        }
     }
 }

@@ -1,6 +1,6 @@
 public class Memory {
     private String brand;
-    private int capacity; // Memory total volume, must be greater than zero. default 1
+    private int capacity; // Memory total volume, must be greater than zero. default 4
     private int volumeUsed; // greater or equal to zero. default 0
     private int volumeFree; // greater or equal to zero. default same as capacity
 
@@ -20,7 +20,7 @@ public class Memory {
     }
 
     public Memory(){
-        this.capacity = 1;
+        this.capacity = 4;
         this.volumeUsed = 0;
         this.volumeFree = this.capacity;
     }
