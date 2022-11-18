@@ -1,8 +1,8 @@
 public class Memory {
     private String brand;
-    private int capacity; // Memory total volume, must be greater than zero
-    private int volumeUsed;
-    private int volumeFree;
+    private int capacity; // Memory total volume, must be greater than zero. default 1
+    private int volumeUsed; // greater or equal to zero. default 0
+    private int volumeFree; // greater or equal to zero. default same as capacity
 
     public Memory(String brand, int capacity, int volumeUsed) {
         if (capacity == 0)
@@ -20,7 +20,9 @@ public class Memory {
     }
 
     public Memory(){
-
+        this.capacity = 1;
+        this.volumeUsed = 0;
+        this.volumeFree = this.capacity;
     }
 
     @Override
