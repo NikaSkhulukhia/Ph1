@@ -1,18 +1,25 @@
 public class Battery {
     private String brand;
     private String type;
-    private int capacity;
-    private int life;
+    private int capacity; // greater than zero, default 1000
+    private int life; // greater or equal to 0 AND less or equal to 100, default 100
 
     public Battery(String brand, String type, int capacity, int life) {
-        this.brand = brand;
-        this.type = type;
-        this.capacity = capacity;
-        this.life = life;
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity must be greater than zero!");
+        } else if (life < 0 || life > 100) {
+            throw new IllegalArgumentException("life must be between 0 - 100 !");
+        } else {
+            this.brand = brand;
+            this.type = type;
+            this.capacity = capacity;
+            this.life = life;
+        }
     }
 
     public Battery(){
-
+        this.capacity = 1000;
+        this.life = 100;
     }
 
     @Override
@@ -44,7 +51,11 @@ public class Battery {
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity must be greater than zero!");
+        } else {
+            this.capacity = capacity;
+        }
     }
 
     public int getLife() {
@@ -52,6 +63,10 @@ public class Battery {
     }
 
     public void setLife(int life) {
-        this.life = life;
+        if (life < 0 || life > 100) {
+            throw new IllegalArgumentException("life must be between 0 - 100 !");
+        } else {
+            this.life = life;
+        }
     }
 }
