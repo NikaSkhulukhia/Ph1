@@ -1,0 +1,7 @@
+1. should we initialize class variables with default values?
+    i.e: private int capacity; VS private int capacity = 0;
+
+2. comments. on which fields/methods is it good to use comments?
+
+3. how should we implement ToString method? is it ok to concatenate strings/variables with + sign?
+    or should we use stringbuilder?
