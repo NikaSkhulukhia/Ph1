@@ -4,7 +4,11 @@
 2. comments. on which fields/methods is it good to use comments?
 
 3. how should we implement ToString method? is it ok to concatenate strings/variables with + sign?
-    or should we use stringbuilder?
+    or should we use StringBuilder?
 
 4. should we use short instead of int/long if the variable guaranteed to be inside short min/max values?
     i.e: processor cores quantity, or battery life percentage.
+
+5. essential classes/methods/variables missing?
+
+6. extra (not required for this model) classes/methods/variables that I have?
