@@ -5,3 +5,6 @@
 
 3. how should we implement ToString method? is it ok to concatenate strings/variables with + sign?
     or should we use stringbuilder?
+
+4. should we use short instead of int/long if the variable guaranteed to be inside short min/max values?
+    i.e: processor cores quantity, or battery life percentage.
