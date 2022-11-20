@@ -15,3 +15,5 @@
 
 7. how and for what do we use literals?
     i.e: 127L or 35,672f
+
+8. How should we arrange classes, interfaces and other files in directories?
