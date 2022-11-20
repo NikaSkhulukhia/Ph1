@@ -16,6 +16,7 @@ public class Camera {
     }
 
     public Camera() {
+        this.MP = 1;
     }
 
     public boolean getHasFlash() {
