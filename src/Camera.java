@@ -2,6 +2,7 @@ public class Camera {
     private boolean hasFlash;
     private int MP; // greater than zero, default 1
     private String type;
+    private String brand;
 
     public Camera(boolean hasFlash, int MP, String type) {
         if (MP <= 0) {
@@ -42,5 +43,11 @@ public class Camera {
         this.type = type;
     }
 
+    public String getBrand() {
+        return brand;
+    }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 }
