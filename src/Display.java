@@ -19,6 +19,16 @@ public class Display {
         this.size = 1;
     }
 
+    @Override
+    public String toString() {
+        return "Display{" +
+                "brand='" + brand + '\'' +
+                ", type='" + type + '\'' +
+                ", resolution='" + resolution + '\'' +
+                ", size=" + size +
+                '}';
+    }
+
     public String getBrand() {
         return brand;
     }

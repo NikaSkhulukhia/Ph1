@@ -34,6 +34,17 @@ public class Body {
         this.height = 1;
     }
 
+    @Override
+    public String toString() {
+        return "Body{" +
+                "length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", build='" + build + '\'' +
+                '}';
+    }
+
     public double getLength() {
         return length;
     }

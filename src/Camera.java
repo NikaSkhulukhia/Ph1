@@ -19,6 +19,16 @@ public class Camera {
         this.MP = 1;
     }
 
+    @Override
+    public String toString() {
+        return "Camera{" +
+                "hasFlash=" + hasFlash +
+                ", MP=" + MP +
+                ", type='" + type + '\'' +
+                ", brand='" + brand + '\'' +
+                '}';
+    }
+
     public boolean getHasFlash() {
         return hasFlash;
     }
