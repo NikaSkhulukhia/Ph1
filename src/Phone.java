@@ -2,7 +2,7 @@ import java.security.PrivateKey;
 import java.util.Date;
 import java.time.*;
 
-public class Phone implements Gadget{
+public class Phone implements Gadget {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -33,14 +33,38 @@ public class Phone implements Gadget{
     public Phone() {
     }
 
+    // Phone can not start a call if the battery life is less or equal to 5%
+    // phone can not start or receive a call if it is already in another call
     public void StartCall(Number receiverNumber) {
-
+        if (receiverNumber == null) {
+            throw new IllegalArgumentException("Receiver number must not be null!");
+        } else if (this.battery == null || this.battery.getLife() <= 5) {
+            System.out.println("<PHONE>: Can not start the call, charge your phone!");
+        } else if (this.isOnCall || this.currentCall != null) {
+            System.out.println("<PHONE>: Can not start the call, phone already in another call!");
+        } else if (receiverNumber.getPhone() == null) {
+            System.out.println("<PHONE>: Can not start the call, phone is turned off or out of coverage area!");
+        } else if (receiverNumber.getPhone().isOnCall || receiverNumber.getPhone().currentCall != null) {
+            System.out.println("<PHONE>: Can not start the call, receiver phone already in another call!");
+        } else {
+            Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Phone receiverPhone = receiverNumber.getPhone();
+            Call currentCall = new Call();
+            currentCall.setCallStartDate(currentDate);
+            currentCall.setCallerNumber(this.phoneNumber);
+            currentCall.setCallerPhone(this);
+            currentCall.setCallerPerson(this.ownerPerson);
+            currentCall.setReceiverNumber(receiverNumber);
+            currentCall.setReceiverPhone(receiverPhone);
+            currentCall.setReceiverPerson(receiverNumber.getOwner());
+            receiverPhone.currentCall = currentCall;
+            receiverPhone.isOnCall = true;
+            this.currentCall = currentCall;
+            this.isOnCall = true;
+        }
     }
 
-    public void StartCall(Phone receiverPhone) {
-
-    }
-
+    // after the call battery life is decreased by 1% for both involved phones
     public void EndCall() {
         if (!this.isOnCall || this.currentCall == null) {
             System.out.println("<PHONE>: no current call to end!");
@@ -53,19 +77,24 @@ public class Phone implements Gadget{
             receiverNumber.getPhone().lastCall = receiverNumber.getPhone().currentCall;
             receiverNumber.getPhone().currentCall = null;
             receiverNumber.getPhone().isOnCall = false;
+            int receiverBatteryNewLife = receiverNumber.getPhone().battery.getLife() - 1;
+            receiverNumber.getPhone().battery.setLife(receiverBatteryNewLife);
 
             // end call for this phone
             this.currentCall.setCallEndDate(currentDate);
             this.lastCall = this.currentCall;
             this.currentCall = null;
             this.isOnCall = false;
+            int thisBatteryNewLife = this.battery.getLife() - 1;
+            this.battery.setLife(thisBatteryNewLife);
         }
     }
 
+    //phone can not send a message if the battery life is less or equal to 2%
     public void SendMessage(Number receiverNumber, String messageText) {
         if (receiverNumber == null) {
             throw new IllegalArgumentException("Receiver number must not be null!");
-        } else if (this.battery != null && this.battery.getLife() <= 2){
+        } else if (this.battery == null || this.battery.getLife() <= 2) {
             System.out.println("<PHONE>: Can not send the message, charge your phone!");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -91,7 +120,7 @@ public class Phone implements Gadget{
     public void Charge(int time) throws IllegalAccessException {
         if (time < 0) {
             throw new IllegalArgumentException("Time must be greater than zero!");
-        } else if (this.battery == null){
+        } else if (this.battery == null) {
             throw new IllegalAccessException("No battery installed! Please insert the battery!");
         } else {
             int batteryCurrentLife = this.battery.getLife();
