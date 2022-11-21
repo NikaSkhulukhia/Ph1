@@ -8,4 +8,9 @@ public class Phone implements Gadget{
     public void ChangeBattery() {
 
     }
+
+    @Override
+    public void reset() {
+
+    }
 }

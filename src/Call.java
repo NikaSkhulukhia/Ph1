@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Call {
      private Number callerNumber;
      private Number receiverNumber;
@@ -5,6 +7,8 @@ public class Call {
      private Person receiverPerson;
      private Phone callerPhone;
      private Phone receiverPhone;
+     private Date callStartDate;
+     private Date callEndDate;
 
     public Call(Number callerNumber, Number receiverNumber, Phone callerPhone, Phone receiverPhone) {
         this.callerNumber = callerNumber;
@@ -74,5 +78,21 @@ public class Call {
 
     public void setReceiverPhone(Phone receiverPhone) {
         this.receiverPhone = receiverPhone;
+    }
+
+    public Date getCallStartDate() {
+        return callStartDate;
+    }
+
+    public void setCallStartDate(Date callStartDate) {
+        this.callStartDate = callStartDate;
+    }
+
+    public Date getCallEndDate() {
+        return callEndDate;
+    }
+
+    public void setCallEndDate(Date callEndDate) {
+        this.callEndDate = callEndDate;
     }
 }

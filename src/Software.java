@@ -2,7 +2,7 @@ import java.util.IllformedLocaleException;
 
 public class Software {
     private String type;
-    Private int version; // greater or equal to zero, default 0;
+    private int version; // greater or equal to zero, default 0;
 
     public Software(String type, int version) {
         if (version < 0) {
