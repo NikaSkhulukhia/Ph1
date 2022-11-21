@@ -35,6 +35,11 @@ public class Memory {
                 '}';
     }
 
+    public void Reset() {
+        this.volumeUsed = 0;
+        this.volumeFree = this.capacity;
+    }
+
     public String getBrand() {
         return brand;
     }
