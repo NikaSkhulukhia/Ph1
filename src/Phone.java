@@ -3,6 +3,7 @@ import java.util.Date;
 import java.time.*;
 
 public class Phone implements Gadget {
+    private String name;
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -23,7 +24,8 @@ public class Phone implements Gadget {
     private RAM ram;
     private Software software;
 
-    public Phone(String brand, String serialNumber, Number phoneNumber, Person ownerPerson) {
+    public Phone(String name, String brand, String serialNumber, Number phoneNumber, Person ownerPerson) {
+        this.name = name;
         this.brand = brand;
         this.serialNumber = serialNumber;
         this.phoneNumber = phoneNumber;
@@ -39,13 +41,17 @@ public class Phone implements Gadget {
         if (receiverNumber == null) {
             throw new IllegalArgumentException("Receiver number must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 5) {
-            System.out.println("<PHONE>: Can not start the call, charge your phone!");
+            System.out.println("<" + this.getName() + ">: " + "Can not start the call, charge your phone!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else if (this.isOnCall || this.currentCall != null) {
-            System.out.println("<PHONE>: Can not start the call, phone already in another call!");
+            System.out.println("<" + this.getName() + ">: " + "Can not start the call, phone already in another call!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else if (receiverNumber.getPhone() == null) {
-            System.out.println("<PHONE>: Can not start the call, phone is turned off or out of coverage area!");
+            System.out.println("<" + this.getName() + ">: " + "Can not start the call, phone is turned off or out of coverage area!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else if (receiverNumber.getPhone().isOnCall || receiverNumber.getPhone().currentCall != null) {
-            System.out.println("<PHONE>: Can not start the call, receiver phone already in another call!");
+            System.out.println("<" + this.getName() + ">: " + "Can not start the call, receiver phone already in another call!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Phone receiverPhone = receiverNumber.getPhone();
@@ -61,13 +67,21 @@ public class Phone implements Gadget {
             receiverPhone.isOnCall = true;
             this.currentCall = currentCall;
             this.isOnCall = true;
+
+            // simulate/print start call
+            System.out.println("<" + this.getName() + ">: " + "Call started");
+            System.out.println("<" + this.getName() + ">: " + "Call start date: " + currentCall.getCallStartDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.phoneNumber.GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverNumber.GetFullNumber());
+            System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
     // after the call battery life is decreased by 1% for both involved phones
     public void EndCall() {
         if (!this.isOnCall || this.currentCall == null) {
-            System.out.println("<PHONE>: no current call to end!");
+            System.out.println("<" + this.getName() + ">: " + "No current call to end!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
@@ -87,6 +101,14 @@ public class Phone implements Gadget {
             this.isOnCall = false;
             int thisBatteryNewLife = this.battery.getLife() - 1;
             this.battery.setLife(thisBatteryNewLife);
+
+            // simulate/print end call
+            System.out.println("<" + this.getName() + ">: " + "Call Ended");
+            System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.lastCall.getCallStartDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.lastCall.getCallEndDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.lastCall.getCallerNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastCall.getReceiverNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
@@ -95,7 +117,8 @@ public class Phone implements Gadget {
         if (receiverNumber == null) {
             throw new IllegalArgumentException("Receiver number must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 2) {
-            System.out.println("<PHONE>: Can not send the message, charge your phone!");
+            System.out.println("<" + this.getName() + ">: " + "Can not send the message, charge your phone!");
+            System.out.println("<" + this.getName() + ">: . . . ");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Phone receiverPhone = receiverNumber.getPhone();
@@ -111,17 +134,25 @@ public class Phone implements Gadget {
             this.lastMessageSent = message;
             if (receiverPhone != null)
                 receiverPhone.lastMessageReceived = message;
+
+            // simulate/print send message
+            System.out.println("<" + this.getName() + ">: " + "Message sent");
+            System.out.println("<" + this.getName() + ">: " + "message send date: " + this.lastMessageSent.getMessageSendDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "Sender number: " + this.lastMessageSent.getMessageSenderNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastMessageSent.getMessageReceiverNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Message text: " + this.lastMessageSent.getMessageText());
+            System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
     // time must be greater than zero
     // battery life increases by 1 for each minute(time)
     @Override
-    public void Charge(int time) throws IllegalAccessException {
+    public void Charge(int time) {
         if (time < 0) {
             throw new IllegalArgumentException("Time must be greater than zero!");
         } else if (this.battery == null) {
-            throw new IllegalAccessException("No battery installed! Please insert the battery!");
+            throw new IllegalArgumentException("No battery installed! Please insert the battery!");
         } else {
             int batteryCurrentLife = this.battery.getLife();
             int batteryNewLife = batteryCurrentLife + time;
@@ -129,6 +160,11 @@ public class Phone implements Gadget {
                 batteryNewLife = 100;
             this.battery.setLife(batteryNewLife);
         }
+        // simulate/print charge
+        System.out.println("<" + this.getName() + ">: " + "Phone charged");
+        System.out.println("<" + this.getName() + ">: " + "Charging time: " + time);
+        System.out.println("<" + this.getName() + ">: " + "Battery current life: " + this.battery.getLife());
+        System.out.println("<" + this.getName() + ">: . . . ");
     }
 
     @Override
@@ -137,11 +173,19 @@ public class Phone implements Gadget {
         this.battery.setType(type);
         this.battery.setBrand(brand);
         this.battery.setCapacity(capacity);
+
+        // simulate/print change battery
+        System.out.println("<" + this.getName() + ">: " + "Battery change successful");
+        System.out.println("<" + this.getName() + ">: " + "Battery type: " + type);
+        System.out.println("<" + this.getName() + ">: " + "Battery brand: " + brand);
+        System.out.println("<" + this.getName() + ">: " + "Battery capacity: " + capacity);
+        System.out.println("<" + this.getName() + ">: " + "Battery current life: " + this.battery.getLife());
+        System.out.println("<" + this.getName() + ">: . . . ");
     }
 
     // reset memory, software, current call, last call, last message, isOnCall
     @Override
-    public void reset() {
+    public void Reset() {
         this.isOnCall = false;
         this.currentCall = null;
         this.lastCall = null;
@@ -151,11 +195,43 @@ public class Phone implements Gadget {
             this.memory.Reset();
         if (this.software != null)
             this.software.Reset();
+
+        // simulate/print reset
+        System.out.println("<" + this.getName() + ">: " + "Reset successful");
+        System.out.println("<" + this.getName() + ">: . . . ");
+    }
+
+    @Override
+    public void Update() {
+        if (this.software == null) {
+            System.out.println("<" + this.getName() + ">: " + "Update not successful, no software installed");
+        } else {
+            this.software.Update();
+            // simulate/print reset
+            System.out.println("<" + this.getName() + ">: " + "Update successful");
+            System.out.println("<" + this.getName() + ">: " + "Software new version: " + this.software.getVersion());
+            System.out.println("<" + this.getName() + ">: . . . ");
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Phone{" +
+                "name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", ownerPerson=" + ownerPerson +
+                ", battery=" + battery +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {

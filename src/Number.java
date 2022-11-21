@@ -1,5 +1,5 @@
 public class Number {
-    private static final String preIndex = "+"; // constant symbol '+'
+    private static final String PRE_INDEX = "+"; // constant symbol '+'
     private String brand;
     private String index;
     private String number;
@@ -15,6 +15,10 @@ public class Number {
     }
 
     public Number() {
+    }
+
+    public String GetFullNumber(){
+        return this.PRE_INDEX + " " + this.index + " " + this.number;
     }
 
     @Override
