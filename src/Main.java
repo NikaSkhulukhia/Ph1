@@ -48,16 +48,16 @@ public class Main {
         phone3.setSoftware(soft3);
 
         // simulate call and message methods
-        phone1.StartCall(number2);
-        phone1.StartCall(number3);
-        phone3.StartCall(number1);
-        phone1.EndCall();
-        phone3.StartCall(number2);
-        phone2.SendMessage(number1, "Hi, will call after lecture.");
-        phone1.ChangeBattery("nonremovable", "Samsung", 2000);
-        phone2.Charge(10);
-        phone3.Reset();
-        phone3.Update();
+        phone1.startCall(number2);
+        phone1.startCall(number3);
+        phone3.startCall(number1);
+        phone1.endCall();
+        phone3.startCall(number2);
+        phone2.sendMessage(number1, "Hi, will call after lecture.");
+        phone1.changeBattery("nonremovable", "Samsung", 2000);
+        phone2.charge(10);
+        phone3.reset();
+        phone3.update();
 
         System.out.println("<MAIN>: Ending simulation of the Phone app...");
         System.out.println("<MAIN>: . . .");

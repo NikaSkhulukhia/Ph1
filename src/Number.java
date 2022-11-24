@@ -17,7 +17,7 @@ public class Number {
     public Number() {
     }
 
-    public String GetFullNumber(){
+    public String getFullNumber(){
         return this.PRE_INDEX + " " + this.index + " " + this.number;
     }
 

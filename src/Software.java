@@ -17,12 +17,12 @@ public class Software {
     }
 
     // Reset software version to zero
-    public void Reset() {
+    public void reset() {
         this.version = 0;
     }
 
     // increase software version by one
-    public void Update() {
+    public void update() {
         this.version++;
     }
 

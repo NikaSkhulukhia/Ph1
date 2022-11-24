@@ -35,7 +35,7 @@ public class Memory {
                 '}';
     }
 
-    public void Reset() {
+    public void reset() {
         this.volumeUsed = 0;
         this.volumeFree = this.capacity;
     }

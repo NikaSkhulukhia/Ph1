@@ -37,7 +37,7 @@ public class Phone implements Gadget {
 
     // Phone can not start a call if the battery life is less or equal to 5%
     // phone can not start or receive a call if it is already in another call
-    public void StartCall(Number receiverNumber) {
+    public void startCall(Number receiverNumber) {
         if (receiverNumber == null) {
             throw new IllegalArgumentException("Receiver number must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 5) {
@@ -71,14 +71,14 @@ public class Phone implements Gadget {
             // simulate/print start call
             System.out.println("<" + this.getName() + ">: " + "Call started");
             System.out.println("<" + this.getName() + ">: " + "Call start date: " + currentCall.getCallStartDate().toString());
-            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.phoneNumber.GetFullNumber());
-            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverNumber.GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.phoneNumber.getFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverNumber.getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
     // after the call battery life is decreased by 1% for both involved phones
-    public void EndCall() {
+    public void endCall() {
         if (!this.isOnCall || this.currentCall == null) {
             System.out.println("<" + this.getName() + ">: " + "No current call to end!");
             System.out.println("<" + this.getName() + ">: . . . ");
@@ -106,14 +106,14 @@ public class Phone implements Gadget {
             System.out.println("<" + this.getName() + ">: " + "Call Ended");
             System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.lastCall.getCallStartDate().toString());
             System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.lastCall.getCallEndDate().toString());
-            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.lastCall.getCallerNumber().GetFullNumber());
-            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastCall.getReceiverNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.lastCall.getCallerNumber().getFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastCall.getReceiverNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
     //phone can not send a message if the battery life is less or equal to 2%
-    public void SendMessage(Number receiverNumber, String messageText) {
+    public void sendMessage(Number receiverNumber, String messageText) {
         if (receiverNumber == null) {
             throw new IllegalArgumentException("Receiver number must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 2) {
@@ -138,8 +138,8 @@ public class Phone implements Gadget {
             // simulate/print send message
             System.out.println("<" + this.getName() + ">: " + "Message sent");
             System.out.println("<" + this.getName() + ">: " + "message send date: " + this.lastMessageSent.getMessageSendDate().toString());
-            System.out.println("<" + this.getName() + ">: " + "Sender number: " + this.lastMessageSent.getMessageSenderNumber().GetFullNumber());
-            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastMessageSent.getMessageReceiverNumber().GetFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Sender number: " + this.lastMessageSent.getMessageSenderNumber().getFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.lastMessageSent.getMessageReceiverNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: " + "Message text: " + this.lastMessageSent.getMessageText());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
@@ -148,7 +148,7 @@ public class Phone implements Gadget {
     // time must be greater than zero
     // battery life increases by 1 for each minute(time)
     @Override
-    public void Charge(int time) {
+    public void charge(int time) {
         if (time < 0) {
             throw new IllegalArgumentException("Time must be greater than zero!");
         } else if (this.battery == null) {
@@ -168,7 +168,7 @@ public class Phone implements Gadget {
     }
 
     @Override
-    public void ChangeBattery(String type, String brand, int capacity) {
+    public void changeBattery(String type, String brand, int capacity) {
         this.battery = new Battery();
         this.battery.setType(type);
         this.battery.setBrand(brand);
@@ -185,16 +185,16 @@ public class Phone implements Gadget {
 
     // reset memory, software, current call, last call, last message, isOnCall
     @Override
-    public void Reset() {
+    public void reset() {
         this.isOnCall = false;
         this.currentCall = null;
         this.lastCall = null;
         this.lastMessageSent = null;
         this.lastMessageReceived = null;
         if (this.memory != null)
-            this.memory.Reset();
+            this.memory.reset();
         if (this.software != null)
-            this.software.Reset();
+            this.software.reset();
 
         // simulate/print reset
         System.out.println("<" + this.getName() + ">: " + "Reset successful");
@@ -202,11 +202,11 @@ public class Phone implements Gadget {
     }
 
     @Override
-    public void Update() {
+    public void update() {
         if (this.software == null) {
             System.out.println("<" + this.getName() + ">: " + "Update not successful, no software installed");
         } else {
-            this.software.Update();
+            this.software.update();
             // simulate/print reset
             System.out.println("<" + this.getName() + ">: " + "Update successful");
             System.out.println("<" + this.getName() + ">: " + "Software new version: " + this.software.getVersion());
