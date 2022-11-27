@@ -1,5 +1,6 @@
-public class Battery {
-    private String brand;
+import java.util.Objects;
+
+public class Battery extends PhoneParts{
     private String type;
     private int capacity; // greater than zero, default 1000
     private int life; // greater or equal to 0 AND less or equal to 100, default 100
@@ -10,7 +11,7 @@ public class Battery {
         } else if (life < 0 || life > 100) {
             throw new IllegalArgumentException("life must be between 0 - 100 !");
         } else {
-            this.brand = brand;
+            this.setBrand(brand);
             this.type = type;
             this.capacity = capacity;
             this.life = life;
@@ -23,16 +24,18 @@ public class Battery {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         String result = "This is " + this.type + " battery, with volume of "
-                + this.capacity + " mAH, made by " + this.brand + ".";
+                + this.capacity + " mAH, made by " + this.getBrand() + ".";
         result += " Currently it is charged for " + this.life + "%.";
         return result;
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
     public String getType() {
         return type;
@@ -40,10 +43,6 @@ public class Battery {
 
     public int getCapacity() {
         return capacity;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public void setType(String type) {
@@ -68,5 +67,23 @@ public class Battery {
         } else {
             this.life = life;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Battery battery = (Battery) o;
+        return capacity == battery.capacity
+                && life == battery.life
+                && Objects.equals(type, battery.type)
+                && Objects.equals(getBrand(), battery.getBrand())
+                && Objects.equals(getSerialNumber(), battery.getSerialNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, capacity, life, getSerialNumber(), getBrand());
     }
 }
