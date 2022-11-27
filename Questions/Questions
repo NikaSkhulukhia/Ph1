@@ -1,26 +1,2 @@
-1. should we initialize class variables with default values?
-    i.e: private int capacity; VS private int capacity = 0;
-
-2. comments. on which fields/methods is it good to use comments?
-
-3. how should we implement ToString method? is it ok to concatenate strings/variables with + sign?
-    or should we use StringBuilder?
-
-4. should we use short instead of int/long if the variable guaranteed to be inside short min/max values?
-    i.e: processor cores quantity, or battery life percentage.
-
-5. essential classes/methods/variables missing?
-
-6. extra (not required for this model) classes/methods/variables that I have?
-
-7. how and for what do we use literals?
-    i.e: 127L or 35,672f
-
-8. How should we arrange classes, interfaces and other files in directories?
-
-9. is this important warning during "git add" command?
-    "warning: LF will be replaced by CRLF in src/Main.java."
-
-10. How to extend String? from lecture 1 exam questions....
-
+1. is "@override" used only for readability?
 
