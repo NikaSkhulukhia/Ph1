@@ -1,8 +1,9 @@
-public class Camera {
-    private boolean hasFlash;
-    private int MP; // greater than zero, default 1
+import java.util.Objects;
+
+public class Camera extends PhoneParts{
+    private boolean hasFlash; // does it have flashlight or not.
+    private int MP; // MegaPixels, greater than zero, default 1
     private String type;
-    private String brand;
 
     public Camera(boolean hasFlash, int MP, String type) {
         if (MP <= 0) {
@@ -20,13 +21,36 @@ public class Camera {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Camera{" +
                 "hasFlash=" + hasFlash +
                 ", MP=" + MP +
                 ", type='" + type + '\'' +
-                ", brand='" + brand + '\'' +
+                ", brand='" + "" + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Camera camera = (Camera) o;
+        return hasFlash == camera.hasFlash
+                && MP == camera.MP
+                && Objects.equals(type, camera.type)
+                && Objects.equals(getBrand(), camera.getBrand())
+                && Objects.equals(getSerialNumber(), camera.getSerialNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hasFlash, MP, type, getSerialNumber(), getBrand());
     }
 
     public boolean getHasFlash() {
@@ -54,11 +78,5 @@ public class Camera {
         this.type = type;
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
 }

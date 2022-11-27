@@ -36,6 +36,24 @@ public class Battery extends PhoneParts{
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Battery battery = (Battery) o;
+        return capacity == battery.capacity
+                && life == battery.life
+                && Objects.equals(type, battery.type)
+                && Objects.equals(getBrand(), battery.getBrand())
+                && Objects.equals(getSerialNumber(), battery.getSerialNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, capacity, life, getSerialNumber(), getBrand());
+    }
+
 
     public String getType() {
         return type;
@@ -69,21 +87,5 @@ public class Battery extends PhoneParts{
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (this.hashCode() != o.hashCode()) return false;
-        Battery battery = (Battery) o;
-        return capacity == battery.capacity
-                && life == battery.life
-                && Objects.equals(type, battery.type)
-                && Objects.equals(getBrand(), battery.getBrand())
-                && Objects.equals(getSerialNumber(), battery.getSerialNumber());
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, capacity, life, getSerialNumber(), getBrand());
-    }
 }
