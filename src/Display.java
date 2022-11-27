@@ -39,6 +39,7 @@ public class Display extends PhoneParts {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
         Display display = (Display) o;
         return Double.compare(display.size, size) == 0
                 && Objects.equals(type, display.type)

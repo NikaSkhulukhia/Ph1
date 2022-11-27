@@ -1,5 +1,6 @@
-public class Memory {
-    private String brand;
+import java.util.Objects;
+
+public class Memory extends PhoneParts{
     private int capacity; // Memory total volume, must be greater than zero. default 4
     private int volumeUsed; // greater or equal to zero. default 0
     private int volumeFree; // greater or equal to zero. default same as capacity
@@ -12,7 +13,7 @@ public class Memory {
         } else if (volumeUsed > capacity) {
             throw new IllegalArgumentException("volumeUsed must be less or equal to total capacity!");
         } else {
-            this.brand = brand;
+            setBrand(brand);
             this.capacity = capacity;
             this.volumeUsed = volumeUsed;
             this.volumeFree = this.capacity - this.volumeUsed;
@@ -26,26 +27,41 @@ public class Memory {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Memory{" +
-                "brand='" + brand + '\'' +
+                "brand='" + getBrand() + '\'' +
                 ", capacity=" + capacity +
                 ", volumeUsed=" + volumeUsed +
                 ", volumeFree=" + volumeFree +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Memory memory = (Memory) o;
+        return capacity == memory.capacity
+                && volumeUsed == memory.volumeUsed
+                && volumeFree == memory.volumeFree
+                && Objects.equals(getSerialNumber(), memory.getSerialNumber())
+                && Objects.equals(getBrand(), memory.getBrand());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(capacity, volumeUsed, volumeFree, getSerialNumber(), getBrand());
+    }
+
     public void reset() {
         this.volumeUsed = 0;
         this.volumeFree = this.capacity;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public int getCapacity() {
