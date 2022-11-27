@@ -1,12 +1,13 @@
-public class RAM {
-    private String brand;
+import java.util.Objects;
+
+public class RAM extends PhoneParts{
     private int capacity; // greater than zero. default 2
 
     public RAM(String brand, int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("capacity must be greater than zero!");
         } else {
-            this.brand = brand;
+            setBrand(brand);
             this.capacity = capacity;
         }
     }
@@ -16,19 +17,32 @@ public class RAM {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "RAM{" +
-                "brand='" + brand + '\'' +
+                "brand='" + getBrand() + '\'' +
                 ", capacity=" + capacity +
                 '}';
     }
 
-    public String getBrand() {
-        return brand;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        RAM ram = (RAM) o;
+        return capacity == ram.capacity
+                && Objects.equals(getSerialNumber(), ram.getSerialNumber())
+                && Objects.equals(getBrand(), ram.getBrand());
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    @Override
+    public int hashCode() {
+        return Objects.hash(capacity, getSerialNumber(), getBrand());
     }
 
     public int getCapacity() {
