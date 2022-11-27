@@ -1,5 +1,6 @@
-public class Display {
-    private String brand;
+import java.util.Objects;
+
+public class Display extends PhoneParts {
     private String type;
     private String resolution;
     private double size; // greater than zero, default 1
@@ -8,7 +9,7 @@ public class Display {
         if (size <= 0){
             throw new IllegalArgumentException("size must be greater than zero!");
         } else {
-            this.brand = brand;
+            setBrand(brand);
             this.type = type;
             this.resolution = resolution;
             this.size = size;
@@ -20,21 +21,35 @@ public class Display {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Display{" +
-                "brand='" + brand + '\'' +
+                "brand='" + getBrand() + '\'' +
                 ", type='" + type + '\'' +
                 ", resolution='" + resolution + '\'' +
                 ", size=" + size +
                 '}';
     }
 
-    public String getBrand() {
-        return brand;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Display display = (Display) o;
+        return Double.compare(display.size, size) == 0
+                && Objects.equals(type, display.type)
+                && Objects.equals(resolution, display.resolution)
+                && Objects.equals(this.getBrand(), display.getBrand())
+                && Objects.equals(this.getSerialNumber(), display.getSerialNumber());
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, resolution, size, getSerialNumber(), getBrand());
     }
 
     public String getType() {
