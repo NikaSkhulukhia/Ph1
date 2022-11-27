@@ -1,5 +1,6 @@
-public class Processor {
-    private String brand;
+import java.util.Objects;
+
+public class Processor extends PhoneParts{
     private int coreNum; // greater than zero. default 1
     private double speed; // greater than zero. default 1
 
@@ -9,7 +10,7 @@ public class Processor {
         } else if (speed <= 0) {
             throw new IllegalArgumentException("speed must be greater than zero!");
         } else {
-            this.brand = brand;
+            setBrand(brand);
             this.coreNum = coreNum;
             this.speed = speed;
         }
@@ -21,19 +22,33 @@ public class Processor {
     }
 
     @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         String result = "";
         result += "this is a " + coreNum + " core processor with ";
-        result += speed + " GHz, made by " + brand + ".";
+        result += speed + " GHz, made by " + getBrand() + ".";
         return result;
     }
 
-    public String getBrand() {
-        return brand;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Processor processor = (Processor) o;
+        return coreNum == processor.coreNum
+                && Double.compare(processor.speed, speed) == 0
+                && Objects.equals(getSerialNumber(), processor.getSerialNumber())
+                && Objects.equals(getBrand(), processor.getBrand());
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    @Override
+    public int hashCode() {
+        return Objects.hash(coreNum, speed, getSerialNumber(), getBrand());
     }
 
     public int getCoreNum() {
