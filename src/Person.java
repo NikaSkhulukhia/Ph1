@@ -6,7 +6,6 @@ public class Person {
     private String idNumber;
     private Date birthDate;
     private Number phoneNumber;
-    private Phone phone;
 
     public Person(String firstName, String lastName, String idNumber, Date birthDate, Number phoneNumber, Phone phone) {
         this.firstName = firstName;
@@ -14,7 +13,6 @@ public class Person {
         this.idNumber = idNumber;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
-        this.phone = phone;
     }
 
     public Person() {
@@ -28,7 +26,6 @@ public class Person {
                 ", idNumber='" + idNumber + '\'' +
                 ", birthDate=" + birthDate +
                 ", phoneNumber=" + phoneNumber +
-                ", phone=" + phone +
                 '}';
     }
 
@@ -70,13 +67,5 @@ public class Person {
 
     public void setPhoneNumber(Number phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Phone phone) {
-        this.phone = phone;
     }
 }

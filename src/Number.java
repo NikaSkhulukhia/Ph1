@@ -3,20 +3,19 @@ public class Number {
     private String brand;
     private String index;
     private String number;
-    private Person owner;
-    private Phone phone;
 
     public Number(String brand, String index, String number, Person owner, Phone phone) {
         this.brand = brand;
         this.index = index;
         this.number = number;
-        this.owner = owner;
-        this.phone = phone;
     }
 
     public Number() {
     }
 
+    /*
+    number is built by pre-index ("+"), index (numeric string like: "577"), number (numeric string like: 12344325)
+     */
     public String getFullNumber(){
         return this.PRE_INDEX + " " + this.index + " " + this.number;
     }
@@ -27,8 +26,6 @@ public class Number {
                 "brand='" + brand + '\'' +
                 ", index='" + index + '\'' +
                 ", number='" + number + '\'' +
-                ", owner=" + owner +
-                ", phone=" + phone +
                 '}';
     }
 
@@ -54,21 +51,5 @@ public class Number {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public Person getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Person owner) {
-        this.owner = owner;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Phone phone) {
-        this.phone = phone;
     }
 }

@@ -37,32 +37,28 @@ public class Phone implements Gadget {
 
     // Phone can not start a call if the battery life is less or equal to 5%
     // phone can not start or receive a call if it is already in another call
-    public void startCall(Number receiverNumber) {
-        if (receiverNumber == null) {
-            throw new IllegalArgumentException("Receiver number must not be null!");
+    public void startCall(Phone receiverPhone) {
+        if (receiverPhone == null) {
+            throw new IllegalArgumentException("Receiver phone must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 5) {
             System.out.println("<" + this.getName() + ">: " + "Can not start the call, charge your phone!");
             System.out.println("<" + this.getName() + ">: . . . ");
         } else if (this.isOnCall || this.currentCall != null) {
             System.out.println("<" + this.getName() + ">: " + "Can not start the call, phone already in another call!");
             System.out.println("<" + this.getName() + ">: . . . ");
-        } else if (receiverNumber.getPhone() == null) {
-            System.out.println("<" + this.getName() + ">: " + "Can not start the call, phone is turned off or out of coverage area!");
-            System.out.println("<" + this.getName() + ">: . . . ");
-        } else if (receiverNumber.getPhone().isOnCall || receiverNumber.getPhone().currentCall != null) {
+        } else if (receiverPhone.isOnCall || receiverPhone.currentCall != null) {
             System.out.println("<" + this.getName() + ">: " + "Can not start the call, receiver phone already in another call!");
             System.out.println("<" + this.getName() + ">: . . . ");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Phone receiverPhone = receiverNumber.getPhone();
             Call currentCall = new Call();
             currentCall.setCallStartDate(currentDate);
             currentCall.setCallerNumber(this.phoneNumber);
             currentCall.setCallerPhone(this);
             currentCall.setCallerPerson(this.ownerPerson);
-            currentCall.setReceiverNumber(receiverNumber);
+            currentCall.setReceiverNumber(receiverPhone.getPhoneNumber());
             currentCall.setReceiverPhone(receiverPhone);
-            currentCall.setReceiverPerson(receiverNumber.getOwner());
+            currentCall.setReceiverPerson(receiverPhone.getOwnerPerson());
             receiverPhone.currentCall = currentCall;
             receiverPhone.isOnCall = true;
             this.currentCall = currentCall;
@@ -72,7 +68,7 @@ public class Phone implements Gadget {
             System.out.println("<" + this.getName() + ">: " + "Call started");
             System.out.println("<" + this.getName() + ">: " + "Call start date: " + currentCall.getCallStartDate().toString());
             System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.phoneNumber.getFullNumber());
-            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverNumber.getFullNumber());
+            System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverPhone.getPhoneNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
@@ -86,13 +82,13 @@ public class Phone implements Gadget {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
             // end call for receiver
-            Number receiverNumber = this.currentCall.getReceiverNumber();
-            receiverNumber.getPhone().currentCall.setCallEndDate(currentDate);
-            receiverNumber.getPhone().lastCall = receiverNumber.getPhone().currentCall;
-            receiverNumber.getPhone().currentCall = null;
-            receiverNumber.getPhone().isOnCall = false;
-            int receiverBatteryNewLife = receiverNumber.getPhone().battery.getLife() - 1;
-            receiverNumber.getPhone().battery.setLife(receiverBatteryNewLife);
+            Phone receiverPhone = this.currentCall.getReceiverPhone();
+            receiverPhone.currentCall.setCallEndDate(currentDate);
+            receiverPhone.lastCall = receiverPhone.currentCall;
+            receiverPhone.currentCall = null;
+            receiverPhone.isOnCall = false;
+            int receiverBatteryNewLife = receiverPhone.battery.getLife() - 1;
+            receiverPhone.battery.setLife(receiverBatteryNewLife);
 
             // end call for this phone
             this.currentCall.setCallEndDate(currentDate);
@@ -113,27 +109,25 @@ public class Phone implements Gadget {
     }
 
     //phone can not send a message if the battery life is less or equal to 2%
-    public void sendMessage(Number receiverNumber, String messageText) {
-        if (receiverNumber == null) {
-            throw new IllegalArgumentException("Receiver number must not be null!");
+    public void sendMessage(Phone receiverPhone, String messageText) {
+        if (receiverPhone == null) {
+            throw new IllegalArgumentException("Receiver phone must not be null!");
         } else if (this.battery == null || this.battery.getLife() <= 2) {
             System.out.println("<" + this.getName() + ">: " + "Can not send the message, charge your phone!");
             System.out.println("<" + this.getName() + ">: . . . ");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Phone receiverPhone = receiverNumber.getPhone();
             Message message = new Message();
             message.setMessageSendDate(currentDate);
             message.setMessageText(messageText);
             message.setMessageSenderPhone(this);
             message.setMessageSenderNumber(this.phoneNumber);
             message.setMessageSenderPerson(this.ownerPerson);
-            message.setMessageReceiverNumber(receiverNumber);
+            message.setMessageReceiverNumber(receiverPhone.getPhoneNumber());
             message.setMessageReceiverPhone(receiverPhone);
-            message.setMessageReceiverPerson(receiverNumber.getOwner());
+            message.setMessageReceiverPerson(receiverPhone.getOwnerPerson());
             this.lastMessageSent = message;
-            if (receiverPhone != null)
-                receiverPhone.lastMessageReceived = message;
+            receiverPhone.lastMessageReceived = message;
 
             // simulate/print send message
             System.out.println("<" + this.getName() + ">: " + "Message sent");
