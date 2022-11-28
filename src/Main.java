@@ -15,21 +15,12 @@ public class Main {
         Number number1 = new Number("AT&T", "1", "054565465", null, null);
         Person person1 = new Person("Alice", "Smith", "245245", null, number1, null);
         Phone phone1 = new Phone("Alice's S22","Samsung", "03r303f", number1, person1);
-        number1.setOwner(person1);
-        number1.setPhone(phone1);
-        person1.setPhone(phone1);
         Number number2 = new Number("Verizon", "577", "4534563456", null, null);
         Person person2 = new Person("Bob", "Peterson", "2345677654", null, number2, null);
         Phone phone2 = new Phone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
-        number2.setOwner(person2);
-        number2.setPhone(phone2);
-        person2.setPhone(phone2);
         Number number3 = new Number("Beeline", "56", "8383388", null, null);
         Person person3 = new Person("Tom", "Black", "987654", null, number3, null);
         Phone phone3 = new Phone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
-        number3.setOwner(person3);
-        number3.setPhone(phone3);
-        person3.setPhone(phone3);
 
         // create essential parts for phones
         Battery bat1 = new Battery("Samsung", "removable", 3000, 100);
@@ -48,12 +39,12 @@ public class Main {
         phone3.setSoftware(soft3);
 
         // simulate call and message methods
-        phone1.startCall(number2);
-        phone1.startCall(number3);
-        phone3.startCall(number1);
+        phone1.startCall(phone2);
+        phone1.startCall(phone3);
+        phone3.startCall(phone1);
         phone1.endCall();
-        phone3.startCall(number2);
-        phone2.sendMessage(number1, "Hi, will call after lecture.");
+        phone3.startCall(phone2);
+        phone2.sendMessage(phone1, "Hi, will call after lecture.");
         phone1.changeBattery("nonremovable", "Samsung", 2000);
         phone2.charge(10);
         phone3.reset();
