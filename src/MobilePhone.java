@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.time.*;
+import java.util.Objects;
 
 public class MobilePhone extends Phone {
     private String name;
@@ -195,7 +196,7 @@ public class MobilePhone extends Phone {
 
     @Override
     public String toString() {
-        return "Phone{" +
+        return "MobilePhone{" +
                 "name='" + name + '\'' +
                 ", brand='" + getBrand() + '\'' +
                 ", serialNumber='" + getSerialNumber() + '\'' +
@@ -203,6 +204,27 @@ public class MobilePhone extends Phone {
                 ", ownerPerson=" + getOwnerPerson() +
                 ", battery=" + getBattery() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        MobilePhone that = (MobilePhone) o;
+        return Objects.equals(name, that.name)
+                && Objects.equals(body, that.body)
+                && Objects.equals(cameraFront, that.cameraFront) 
+                && Objects.equals(cameraRear, that.cameraRear)
+                && Objects.equals(display, that.display)
+                && Objects.equals(software, that.software)
+                && Objects.equals(getSerialNumber(), that.getSerialNumber())
+                && Objects.equals(getBrand(), that.getBrand());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, body, cameraFront, cameraRear, display, software, getSerialNumber(), getBrand());
     }
 
     public String getName() {
