@@ -214,7 +214,7 @@ public class MobilePhone extends Phone {
         MobilePhone that = (MobilePhone) o;
         return Objects.equals(name, that.name)
                 && Objects.equals(body, that.body)
-                && Objects.equals(cameraFront, that.cameraFront) 
+                && Objects.equals(cameraFront, that.cameraFront)
                 && Objects.equals(cameraRear, that.cameraRear)
                 && Objects.equals(display, that.display)
                 && Objects.equals(software, that.software)

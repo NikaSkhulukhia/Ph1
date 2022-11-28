@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public abstract class Phone implements Gadget{
+public abstract class Phone {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -22,6 +22,11 @@ public abstract class Phone implements Gadget{
     public abstract void startCall(Phone receiverPhone);
     public abstract void endCall();
     public abstract void sendMessage(Phone receiverPhone, String messageText);
+
+    public abstract void charge(int time);
+    public abstract void changeBattery(String type, String brand, int capacity);
+    public abstract void reset();
+    public abstract void update();
 
     public String getBrand() {
         return brand;
