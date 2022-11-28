@@ -14,13 +14,13 @@ public class Main {
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465", null, null);
         Person person1 = new Person("Alice", "Smith", "245245", null, number1, null);
-        Phone phone1 = new Phone("Alice's S22","Samsung", "03r303f", number1, person1);
+        MobilePhone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
         Number number2 = new Number("Verizon", "577", "4534563456", null, null);
         Person person2 = new Person("Bob", "Peterson", "2345677654", null, number2, null);
-        Phone phone2 = new Phone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
+        MobilePhone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
         Number number3 = new Number("Beeline", "56", "8383388", null, null);
         Person person3 = new Person("Tom", "Black", "987654", null, number3, null);
-        Phone phone3 = new Phone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
+        MobilePhone phone3 = new MobilePhone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
 
         // create essential parts for phones
         Battery bat1 = new Battery("Samsung", "removable", 3000, 100);
