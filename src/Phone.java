@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public abstract class Phone {
+public abstract class Phone extends Object {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
