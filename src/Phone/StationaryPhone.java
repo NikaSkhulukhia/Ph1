@@ -1,18 +1,24 @@
+package Phone;
+
+import PhoneData.Call;
+import PhoneData.Message;
+import PhoneParts.Keyboard;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
-public class SatellitePhone extends Phone{
-    private String nearestSatelliteSerialNumber;
+public class StationaryPhone extends Phone{
     private Keyboard keyboard;
+    private boolean hasWire;
 
-    public SatellitePhone(String nearestSatelliteSerialNumber, Keyboard keyboard) {
-        this.nearestSatelliteSerialNumber = nearestSatelliteSerialNumber;
+    public StationaryPhone(Keyboard keyboard, boolean hasWire) {
         this.keyboard = keyboard;
+        this.hasWire = hasWire;
     }
 
-    public SatellitePhone() {
+    public StationaryPhone() {
     }
 
     @Override
@@ -39,8 +45,8 @@ public class SatellitePhone extends Phone{
             this.setOnCall(true);
 
             // simulate/print start call
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Call started");
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Call start date: "
+            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "PhoneData.Call started");
+            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: "
                     + currentCall.getCallStartDate().toString());
             System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Caller number: "
                     + this.getPhoneNumber().getFullNumber());
@@ -77,9 +83,9 @@ public class SatellitePhone extends Phone{
             this.getBattery().setLife(thisBatteryNewLife);
 
             // simulate/print end call
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Call Ended");
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Call start date: " + this.getLastCall().getCallStartDate().toString());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Call start date: " + this.getLastCall().getCallEndDate().toString());
+            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call Ended");
+            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallStartDate().toString());
+            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallEndDate().toString());
             System.out.println("<" + this.getSerialNumber() + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
             System.out.println("<" + this.getSerialNumber() + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
             System.out.println("<" + this.getSerialNumber() + ">: . . . ");
@@ -108,11 +114,11 @@ public class SatellitePhone extends Phone{
             receiverPhone.setLastMessageReceived(message);
 
             // simulate/print send message
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Message sent");
+            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Message sent");
             System.out.println("<" + this.getSerialNumber() + ">: " + "message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
             System.out.println("<" + this.getSerialNumber() + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
             System.out.println("<" + this.getSerialNumber() + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Message text: " + this.getLastMessageSent().getMessageText());
+            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Message text: " + this.getLastMessageSent().getMessageText());
             System.out.println("<" + this.getSerialNumber() + ">: . . . ");
         }
     }
@@ -139,9 +145,12 @@ public class SatellitePhone extends Phone{
 
     @Override
     public String toString() {
-        return "SatellitePhone{" +
-                "nearestSatelliteSerialNumber='" + nearestSatelliteSerialNumber + '\'' +
-                ", keyboard=" + keyboard +
+        return "Phone.StationaryPhone{" +
+                "keyboard=" + getSerialNumber() +
+                "keyboard=" + getBrand() +
+                "keyboard=" + getOwnerPerson() +
+                "keyboard=" + keyboard +
+                ", hasWire=" + hasWire +
                 '}';
     }
 
@@ -150,31 +159,15 @@ public class SatellitePhone extends Phone{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (this.hashCode() != o.hashCode()) return false;
-        SatellitePhone that = (SatellitePhone) o;
-        return Objects.equals(nearestSatelliteSerialNumber, that.nearestSatelliteSerialNumber)
+        StationaryPhone that = (StationaryPhone) o;
+        return hasWire == that.hasWire
                 && Objects.equals(keyboard, that.keyboard)
-                && Objects.equals(getSerialNumber(), that.getSerialNumber())
-                && Objects.equals(getBrand(), that.getBrand());
+                && Objects.equals(getBrand(), that.getBrand())
+                && Objects.equals(getSerialNumber(), that.getSerialNumber());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nearestSatelliteSerialNumber, keyboard, getSerialNumber(), getBrand());
-    }
-
-    public String getNearestSatelliteSerialNumber() {
-        return nearestSatelliteSerialNumber;
-    }
-
-    public void setNearestSatelliteSerialNumber(String nearestSatelliteSerialNumber) {
-        this.nearestSatelliteSerialNumber = nearestSatelliteSerialNumber;
-    }
-
-    public Keyboard getKeyboard() {
-        return keyboard;
-    }
-
-    public void setKeyboard(Keyboard keyboard) {
-        this.keyboard = keyboard;
+        return Objects.hash(keyboard, hasWire, getBrand(), getSerialNumber());
     }
 }

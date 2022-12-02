@@ -1,3 +1,5 @@
+package PhoneParts;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -18,7 +20,7 @@ public class Keyboard extends PhoneParts{
 
     @Override
     public String toString() {
-        return "Keyboard{" +
+        return "PhoneParts.Keyboard{" +
                 "brand=" + getBrand() +
                 "serial=" + getSerialNumber() +
                 "buttons=" + Arrays.toString(buttons) +

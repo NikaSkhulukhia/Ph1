@@ -1,3 +1,8 @@
+package Person;
+
+import Phone.Phone;
+import PhoneData.Number;
+
 import java.util.Date;
 
 public class Person {
@@ -20,7 +25,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Person.Person{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", idNumber='" + idNumber + '\'' +

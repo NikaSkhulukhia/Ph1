@@ -1,3 +1,5 @@
+package PhoneParts;
+
 import java.util.Objects;
 
 public class Display extends PhoneParts {
@@ -27,7 +29,7 @@ public class Display extends PhoneParts {
 
     @Override
     public String toString() {
-        return "Display{" +
+        return "PhoneParts.Display{" +
                 "brand='" + getBrand() + '\'' +
                 ", type='" + type + '\'' +
                 ", resolution='" + resolution + '\'' +

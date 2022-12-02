@@ -1,3 +1,5 @@
+package PhoneParts;
+
 import java.util.Objects;
 
 public class Processor extends PhoneParts{

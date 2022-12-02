@@ -1,3 +1,8 @@
+package PhoneData;
+
+import Person.Person;
+import Phone.Phone;
+
 import java.util.Date;
 
 public class Message {
@@ -22,7 +27,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "PhoneData.Message{" +
                 "messageSenderNumber=" + messageSenderNumber +
                 ", messageReceiverNumber=" + messageReceiverNumber +
                 ", messageSenderPerson=" + messageSenderPerson +

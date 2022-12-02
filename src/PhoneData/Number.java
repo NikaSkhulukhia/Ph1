@@ -1,3 +1,8 @@
+package PhoneData;
+
+import Person.Person;
+import Phone.Phone;
+
 public class Number {
     private static final String PRE_INDEX = "+"; // constant symbol '+'
     private String brand;
@@ -22,7 +27,7 @@ public class Number {
 
     @Override
     public String toString() {
-        return "Number{" +
+        return "PhoneData.Number{" +
                 "brand='" + brand + '\'' +
                 ", index='" + index + '\'' +
                 ", number='" + number + '\'' +

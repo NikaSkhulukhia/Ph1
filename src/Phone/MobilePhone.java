@@ -1,10 +1,20 @@
+package Phone;
+
+import Person.Person;
+import PhoneData.Call;
+import PhoneData.Message;
+import PhoneParts.Battery;
+import PhoneParts.Camera;
+import PhoneParts.Display;
+import PhoneSoftware.Software;
+import PhoneData.Number;
+
 import java.util.Date;
 import java.time.*;
 import java.util.Objects;
 
 public class MobilePhone extends Phone {
     private String name;
-    private Body body;
     private Camera cameraFront;
     private Camera cameraRear;
     private Display display;
@@ -21,7 +31,7 @@ public class MobilePhone extends Phone {
     public MobilePhone() {
     }
 
-    // Phone can not start a call if the battery life is less or equal to 5%
+    // Phone.Phone can not start a call if the battery life is less or equal to 5%
     // phone can not start or receive a call if it is already in another call
     public void startCall(Phone receiverPhone) {
         if (receiverPhone == null) {
@@ -51,8 +61,8 @@ public class MobilePhone extends Phone {
             this.setOnCall(true);
 
             // simulate/print start call
-            System.out.println("<" + this.getName() + ">: " + "Call started");
-            System.out.println("<" + this.getName() + ">: " + "Call start date: " + currentCall.getCallStartDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Call started");
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Call start date: " + currentCall.getCallStartDate().toString());
             System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.getPhoneNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverPhone.getPhoneNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
@@ -85,9 +95,9 @@ public class MobilePhone extends Phone {
             this.getBattery().setLife(thisBatteryNewLife);
 
             // simulate/print end call
-            System.out.println("<" + this.getName() + ">: " + "Call Ended");
-            System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.getLastCall().getCallStartDate().toString());
-            System.out.println("<" + this.getName() + ">: " + "Call start date: " + this.getLastCall().getCallEndDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Call Ended");
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallStartDate().toString());
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallEndDate().toString());
             System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
@@ -116,11 +126,11 @@ public class MobilePhone extends Phone {
             receiverPhone.setLastMessageReceived(message);
 
             // simulate/print send message
-            System.out.println("<" + this.getName() + ">: " + "Message sent");
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Message sent");
             System.out.println("<" + this.getName() + ">: " + "message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
             System.out.println("<" + this.getName() + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
-            System.out.println("<" + this.getName() + ">: " + "Message text: " + this.getLastMessageSent().getMessageText());
+            System.out.println("<" + this.getName() + ">: " + "PhoneData.Message text: " + this.getLastMessageSent().getMessageText());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
@@ -141,9 +151,9 @@ public class MobilePhone extends Phone {
             this.getBattery().setLife(batteryNewLife);
         }
         // simulate/print charge
-        System.out.println("<" + this.getName() + ">: " + "Phone charged");
+        System.out.println("<" + this.getName() + ">: " + "Phone.Phone charged");
         System.out.println("<" + this.getName() + ">: " + "Charging time: " + time);
-        System.out.println("<" + this.getName() + ">: " + "Battery current life: " + this.getBattery().getLife());
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery current life: " + this.getBattery().getLife());
         System.out.println("<" + this.getName() + ">: . . . ");
     }
 
@@ -155,11 +165,11 @@ public class MobilePhone extends Phone {
         this.getBattery().setCapacity(capacity);
 
         // simulate/print change battery
-        System.out.println("<" + this.getName() + ">: " + "Battery change successful");
-        System.out.println("<" + this.getName() + ">: " + "Battery type: " + type);
-        System.out.println("<" + this.getName() + ">: " + "Battery brand: " + brand);
-        System.out.println("<" + this.getName() + ">: " + "Battery capacity: " + capacity);
-        System.out.println("<" + this.getName() + ">: " + "Battery current life: " + this.getBattery().getLife());
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery change successful");
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery type: " + type);
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery brand: " + brand);
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery capacity: " + capacity);
+        System.out.println("<" + this.getName() + ">: " + "PhoneParts.Battery current life: " + this.getBattery().getLife());
         System.out.println("<" + this.getName() + ">: . . . ");
     }
 
@@ -189,14 +199,14 @@ public class MobilePhone extends Phone {
             this.software.update();
             // simulate/print reset
             System.out.println("<" + this.getName() + ">: " + "Update successful");
-            System.out.println("<" + this.getName() + ">: " + "Software new version: " + this.software.getVersion());
+            System.out.println("<" + this.getName() + ">: " + "PhoneSoftware.Software new version: " + this.software.getVersion());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
 
     @Override
     public String toString() {
-        return "MobilePhone{" +
+        return "Phone.MobilePhone{" +
                 "name='" + name + '\'' +
                 ", brand='" + getBrand() + '\'' +
                 ", serialNumber='" + getSerialNumber() + '\'' +
@@ -213,7 +223,6 @@ public class MobilePhone extends Phone {
         if (this.hashCode() != o.hashCode()) return false;
         MobilePhone that = (MobilePhone) o;
         return Objects.equals(name, that.name)
-                && Objects.equals(body, that.body)
                 && Objects.equals(cameraFront, that.cameraFront)
                 && Objects.equals(cameraRear, that.cameraRear)
                 && Objects.equals(display, that.display)
@@ -224,7 +233,7 @@ public class MobilePhone extends Phone {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, body, cameraFront, cameraRear, display, software, getSerialNumber(), getBrand());
+        return Objects.hash(name, cameraFront, cameraRear, display, software, getSerialNumber(), getBrand());
     }
 
     public String getName() {
@@ -233,14 +242,6 @@ public class MobilePhone extends Phone {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
-    public void setBody(Body body) {
-        this.body = body;
     }
 
     public Camera getCameraFront() {

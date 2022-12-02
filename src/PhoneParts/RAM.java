@@ -1,3 +1,5 @@
+package PhoneParts;
+
 import java.util.Objects;
 
 public class RAM extends PhoneParts{
@@ -23,7 +25,7 @@ public class RAM extends PhoneParts{
 
     @Override
     public String toString() {
-        return "RAM{" +
+        return "PhoneParts.RAM{" +
                 "brand='" + getBrand() + '\'' +
                 ", capacity=" + capacity +
                 '}';

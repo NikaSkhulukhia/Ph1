@@ -1,3 +1,5 @@
+package PhoneSoftware;
+
 import java.util.IllformedLocaleException;
 
 public class Software {
@@ -28,7 +30,7 @@ public class Software {
 
     @Override
     public String toString() {
-        return "Software{" +
+        return "PhoneSoftware.Software{" +
                 "type='" + type + '\'' +
                 ", version=" + version +
                 '}';

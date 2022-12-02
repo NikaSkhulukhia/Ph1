@@ -1,3 +1,5 @@
+package PhoneParts;
+
 import java.util.Objects;
 
 public class Camera extends PhoneParts{
@@ -27,7 +29,7 @@ public class Camera extends PhoneParts{
 
     @Override
     public String toString() {
-        return "Camera{" +
+        return "PhoneParts.Camera{" +
                 "hasFlash=" + hasFlash +
                 ", MP=" + MP +
                 ", type='" + type + '\'' +

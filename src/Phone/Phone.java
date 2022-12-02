@@ -1,9 +1,22 @@
+package Phone;
+
+import Person.*;
+import PhoneData.Number;
+import PhoneParts.*;
+import PhoneData.*;
+
+
 import java.util.Date;
 
-public abstract class Phone extends Object {
+public abstract class Phone{
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
+    private double length;
+    private double width;
+    private double height;
+    private double weight;
+    private String build;
     private Number phoneNumber;
     private Person ownerPerson;
     private Date releaseDate;
@@ -138,5 +151,45 @@ public abstract class Phone extends Object {
 
     public void setMemory(Memory memory) {
         this.memory = memory;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public String getBuild() {
+        return build;
+    }
+
+    public void setBuild(String build) {
+        this.build = build;
     }
 }

@@ -1,7 +1,9 @@
+package PhoneParts;
+
 import java.util.Objects;
 
 public class Memory extends PhoneParts{
-    private int capacity; // Memory total volume, must be greater than zero. default 4
+    private int capacity; // PhoneParts.Memory total volume, must be greater than zero. default 4
     private int volumeUsed; // greater or equal to zero. default 0
     private int volumeFree; // greater or equal to zero. default same as capacity
 
@@ -33,7 +35,7 @@ public class Memory extends PhoneParts{
 
     @Override
     public String toString() {
-        return "Memory{" +
+        return "PhoneParts.Memory{" +
                 "brand='" + getBrand() + '\'' +
                 ", capacity=" + capacity +
                 ", volumeUsed=" + volumeUsed +

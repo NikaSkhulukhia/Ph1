@@ -1,3 +1,5 @@
+package PhoneParts;
+
 public abstract class PhoneParts {
     private String serialNumber;
     private String brand;
@@ -68,7 +70,7 @@ public abstract class PhoneParts {
 
     @Override
     public String toString() {
-        return "PhoneParts{" +
+        return "PhoneParts.PhoneParts{" +
                 "serialNumber='" + serialNumber + '\'' +
                 ", brand='" + brand + '\'' +
                 ", name='" + name + '\'' +

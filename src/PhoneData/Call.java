@@ -1,3 +1,8 @@
+package PhoneData;
+
+import Person.Person;
+import Phone.Phone;
+
 import java.util.Date;
 
 public class Call {
@@ -22,7 +27,7 @@ public class Call {
 
     @Override
     public String toString() {
-        return "Call{" +
+        return "PhoneData.Call{" +
                 "callerNumber=" + callerNumber +
                 ", receiverNumber=" + receiverNumber +
                 ", callerPerson=" + callerPerson +
