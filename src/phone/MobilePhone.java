@@ -1,19 +1,20 @@
-package Phone;
+package phone;
 
-import Person.Person;
-import PhoneData.Call;
-import PhoneData.Message;
-import PhoneParts.Battery;
-import PhoneParts.Camera;
-import PhoneParts.Display;
-import PhoneSoftware.Software;
-import PhoneData.Number;
+import interfaces.IUpdate;
+import person.Person;
+import phonedata.Call;
+import phonedata.Message;
+import phonehardware.Battery;
+import phonehardware.Camera;
+import phonehardware.Display;
+import phonesoftware.Software;
+import phonedata.Number;
 
 import java.util.Date;
 import java.time.*;
 import java.util.Objects;
 
-public class MobilePhone extends Phone {
+public class MobilePhone extends Phone implements IUpdate {
     private String name;
     private Camera cameraFront;
     private Camera cameraRear;

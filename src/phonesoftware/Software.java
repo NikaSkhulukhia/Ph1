@@ -1,6 +1,4 @@
-package PhoneSoftware;
-
-import java.util.IllformedLocaleException;
+package phonesoftware;
 
 public class Software {
     private String type;

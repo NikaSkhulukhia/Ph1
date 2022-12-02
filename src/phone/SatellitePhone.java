@@ -1,14 +1,15 @@
-package Phone;
+package phone;
 
-import PhoneData.*;
-import PhoneParts.*;
+import interfaces.IUpdate;
+import phonedata.*;
+import phonehardware.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
-public class SatellitePhone extends Phone{
+public class SatellitePhone extends Phone implements IUpdate {
     private String nearestSatelliteSerialNumber;
     private Keyboard keyboard;
 
@@ -139,7 +140,7 @@ public class SatellitePhone extends Phone{
 
     @Override
     public void update() {
-
+        
     }
 
     @Override

@@ -1,4 +1,4 @@
-package PhoneParts;
+package phonehardware;
 
 public abstract class PhoneParts {
     private String serialNumber;

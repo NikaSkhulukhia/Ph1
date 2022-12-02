@@ -1,7 +1,7 @@
-package Person;
+package person;
 
-import Phone.Phone;
-import PhoneData.Number;
+import phone.Phone;
+import phonedata.Number;
 
 import java.util.Date;
 

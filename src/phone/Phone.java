@@ -1,14 +1,14 @@
-package Phone;
+package phone;
 
-import Interfaces.*;
-import Person.*;
-import PhoneData.Number;
-import PhoneParts.*;
-import PhoneData.*;
+import interfaces.*;
+import person.*;
+import phonedata.Number;
+import phonehardware.*;
+import phonedata.*;
 
 import java.util.Date;
 
-public abstract class Phone implements ICall, IMessage, ICharge, IReset, IUpdate {
+public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -38,7 +38,6 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset, IUpdate
     public abstract void charge(int time);
     public abstract void changeBattery(String type, String brand, int capacity);
     public abstract void reset();
-    public abstract void update();
 
     public String getBrand() {
         return brand;

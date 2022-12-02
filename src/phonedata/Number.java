@@ -1,7 +1,4 @@
-package PhoneData;
-
-import Person.Person;
-import Phone.Phone;
+package phonedata;
 
 public class Number {
     private static final String PRE_INDEX = "+"; // constant symbol '+'
@@ -9,7 +6,7 @@ public class Number {
     private String index;
     private String number;
 
-    public Number(String brand, String index, String number, Person owner, Phone phone) {
+    public Number(String brand, String index, String number) {
         this.brand = brand;
         this.index = index;
         this.number = number;

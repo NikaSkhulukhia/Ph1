@@ -1,4 +1,4 @@
-package PhoneParts;
+package phonehardware;
 
 import java.util.Objects;
 

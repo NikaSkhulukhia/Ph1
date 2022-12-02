@@ -1,6 +1,6 @@
-package Interfaces;
+package interfaces;
 
-import Phone.Phone;
+import phone.Phone;
 
 public interface IMessage {
     /*

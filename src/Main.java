@@ -1,8 +1,10 @@
-import Person.Person;
-import Phone.MobilePhone;
-import PhoneData.Number;
-import PhoneParts.Battery;
-import PhoneSoftware.Software;
+import person.Person;
+import phone.MobilePhone;
+import phone.Phone;
+import phone.StationaryPhone;
+import phonedata.Number;
+import phonehardware.Battery;
+import phonesoftware.Software;
 
 
 public class Main {
@@ -19,15 +21,19 @@ public class Main {
         System.out.println("<MAIN>: . . .");
 
         // initialize numbers, phones and owners
-        Number number1 = new Number("AT&T", "1", "054565465", null, null);
+        Number number1 = new Number("AT&T", "1", "054565465");
         Person person1 = new Person("Alice", "Smith", "245245", null, number1, null);
-        MobilePhone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
-        Number number2 = new Number("Verizon", "577", "4534563456", null, null);
+        Phone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
+        Number number2 = new Number("Verizon", "577", "4534563456");
         Person person2 = new Person("Bob", "Peterson", "2345677654", null, number2, null);
-        MobilePhone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
-        Number number3 = new Number("Beeline", "56", "8383388", null, null);
+        Phone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
+        Number number3 = new Number("Beeline", "56", "8383388");
         Person person3 = new Person("Tom", "Black", "987654", null, number3, null);
-        MobilePhone phone3 = new MobilePhone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
+        //MobilePhone phone3 = new MobilePhone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
+        Phone phone3 = new StationaryPhone();
+        phone3.setOwnerPerson(person3);
+        phone3.setPhoneNumber(number3);
+
 
         // create essential parts for phones
         Battery bat1 = new Battery("Samsung", "removable", 3000, 100);
@@ -41,9 +47,9 @@ public class Main {
         Software soft1 = new Software("android", 11);
         Software soft2 = new Software("iOS", 14);
         Software soft3 = new Software("android", 12);
-        phone1.setSoftware(soft1);
-        phone2.setSoftware(soft2);
-        phone3.setSoftware(soft3);
+        //phone1.setSoftware(soft1);
+        //phone2.setSoftware(soft2);
+        //phone3.setSoftware(soft3);
 
         // simulate call and message methods
         phone1.startCall(phone2);
@@ -55,7 +61,7 @@ public class Main {
         phone1.changeBattery("nonremovable", "Samsung", 2000);
         phone2.charge(10);
         phone3.reset();
-        phone3.update();
+       // phone3.update();
 
         System.out.println("<MAIN>: Ending simulation of the Phone.Phone app...");
         System.out.println("<MAIN>: . . .");

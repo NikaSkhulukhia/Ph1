@@ -1,8 +1,8 @@
-package Phone;
+package phone;
 
-import PhoneData.Call;
-import PhoneData.Message;
-import PhoneParts.Keyboard;
+import phonedata.Call;
+import phonedata.Message;
+import phonehardware.Keyboard;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -135,11 +135,6 @@ public class StationaryPhone extends Phone{
 
     @Override
     public void reset() {
-
-    }
-
-    @Override
-    public void update() {
 
     }
 
