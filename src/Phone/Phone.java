@@ -1,8 +1,6 @@
 package Phone;
 
-import Interfaces.ICall;
-import Interfaces.ICharge;
-import Interfaces.IMessage;
+import Interfaces.*;
 import Person.*;
 import PhoneData.Number;
 import PhoneParts.*;
@@ -10,7 +8,7 @@ import PhoneData.*;
 
 import java.util.Date;
 
-public abstract class Phone implements ICall, IMessage, ICharge {
+public abstract class Phone implements ICall, IMessage, ICharge, IReset, IUpdate {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -37,7 +35,6 @@ public abstract class Phone implements ICall, IMessage, ICharge {
     public abstract void startCall(Phone receiverPhone);
     public abstract void endCall();
     public abstract void sendMessage(Phone receiverPhone, String messageText);
-
     public abstract void charge(int time);
     public abstract void changeBattery(String type, String brand, int capacity);
     public abstract void reset();
