@@ -1,14 +1,16 @@
 package Phone;
 
+import Interfaces.ICall;
+import Interfaces.ICharge;
+import Interfaces.IMessage;
 import Person.*;
 import PhoneData.Number;
 import PhoneParts.*;
 import PhoneData.*;
 
-
 import java.util.Date;
 
-public abstract class Phone{
+public abstract class Phone implements ICall, IMessage, ICharge {
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
