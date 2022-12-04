@@ -4,8 +4,9 @@ import person.Person;
 import phone.Phone;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class Message {
+public final class Message {
     private Number messageSenderNumber;
     private Number messageReceiverNumber;
     private Person messageSenderPerson;
@@ -37,6 +38,28 @@ public class Message {
                 ", messageSendDate=" + messageSendDate +
                 ", messageText='" + messageText + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Message message = (Message) o;
+        return Objects.equals(messageSenderNumber, message.messageSenderNumber)
+                && Objects.equals(messageReceiverNumber, message.messageReceiverNumber)
+                && Objects.equals(messageSenderPerson, message.messageSenderPerson)
+                && Objects.equals(messageReceiverPerson, message.messageReceiverPerson)
+                && Objects.equals(messageSenderPhone, message.messageSenderPhone)
+                && Objects.equals(messageReceiverPhone, message.messageReceiverPhone)
+                && Objects.equals(messageSendDate, message.messageSendDate)
+                && Objects.equals(messageText, message.messageText);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(messageSenderNumber, messageReceiverNumber, messageSenderPerson,
+                messageReceiverPerson, messageSenderPhone, messageReceiverPhone, messageSendDate, messageText);
     }
 
     public Number getMessageSenderNumber() {

@@ -4,8 +4,9 @@ import person.Person;
 import phone.Phone;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class Call {
+public final class Call {
      private Number callerNumber;
      private Number receiverNumber;
      private Person callerPerson;
@@ -35,6 +36,24 @@ public class Call {
                 ", callerPhone=" + callerPhone +
                 ", receiverPhone=" + receiverPhone +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Call call = (Call) o;
+        return Objects.equals(callerNumber, call.callerNumber) && Objects.equals(receiverNumber, call.receiverNumber)
+                && Objects.equals(callerPerson, call.callerPerson) && Objects.equals(receiverPerson, call.receiverPerson)
+                && Objects.equals(callerPhone, call.callerPhone) && Objects.equals(receiverPhone, call.receiverPhone)
+                && Objects.equals(callStartDate, call.callStartDate) && Objects.equals(callEndDate, call.callEndDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(callerNumber, receiverNumber, callerPerson, receiverPerson, callerPhone,
+                receiverPhone, callStartDate, callEndDate);
     }
 
     public Number getCallerNumber() {
