@@ -3,6 +3,7 @@ package phone;
 import interfaces.IUpdate;
 import phonedata.*;
 import phonehardware.*;
+import phonesoftware.Software;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,6 +13,7 @@ import java.util.Objects;
 public class SatellitePhone extends Phone implements IUpdate {
     private String nearestSatelliteSerialNumber;
     private Keyboard keyboard;
+    private Software software;
 
     public SatellitePhone(String nearestSatelliteSerialNumber, Keyboard keyboard) {
         this.nearestSatelliteSerialNumber = nearestSatelliteSerialNumber;
@@ -140,6 +142,15 @@ public class SatellitePhone extends Phone implements IUpdate {
 
     @Override
     public void update() {
+        if (this.software == null) {
+            System.out.println("<Satelite phone>: " + "Update not successful, no software installed");
+        } else {
+            this.software.update();
+            // simulate/print reset
+            System.out.println("<Satelite phone>: " + "Update successful");
+            System.out.println("<Satelite phone>: " + "PhoneSoftware.Software new version: " + this.software.getVersion());
+            System.out.println("<Satelite phone>: . . . ");
+        }
         
     }
 
