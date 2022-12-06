@@ -1,3 +1,5 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import person.Person;
 import phone.MobilePhone;
 import phone.Phone;
@@ -7,7 +9,9 @@ import phonehardware.Battery;
 import phonesoftware.Software;
 
 
+
 public class Main {
+    private static final Logger logger = LogManager.getLogger();
     /*\
     Main method to run the phone application and simulate calls.
     Rules for phone call/message:
@@ -19,7 +23,6 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("<MAIN>: Starting simulation of the Phone.Phone app...");
         System.out.println("<MAIN>: . . .");
-        // test commit 
 
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465");

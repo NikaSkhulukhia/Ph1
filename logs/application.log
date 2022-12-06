@@ -1,0 +1,10 @@
+2022-12-07 02:41:08,136 ERROR p.MobilePhone [main] test error
+2022-12-07 02:41:08,140 INFO p.MobilePhone [main] test info
+2022-12-07 02:41:08,140 DEBUG p.MobilePhone [main] test debug
+2022-12-07 02:41:08,141 TRACE p.MobilePhone [main] test trace
+2022-12-07 02:48:47,393 ERROR p.MobilePhone [main] test error
+2022-12-07 02:48:47,400 INFO p.MobilePhone [main] test info
+2022-12-07 02:48:47,401 DEBUG p.MobilePhone [main] test debug
+2022-12-07 02:49:54,702 ERROR p.MobilePhone [main] test error
+2022-12-07 02:49:54,708 INFO p.MobilePhone [main] test info
+2022-12-07 02:49:54,709 DEBUG p.MobilePhone [main] test debug

@@ -1,0 +1,9 @@
+2022-12-07 03:07:45,062 ERROR p.MobilePhone [main] test error
+2022-12-07 03:07:45,067 INFO p.MobilePhone [main] test info
+2022-12-07 03:07:45,068 DEBUG p.MobilePhone [main] test debug
+2022-12-07 03:16:50,229 ERROR p.MobilePhone [main] test error
+2022-12-07 03:16:50,234 INFO p.MobilePhone [main] test info
+2022-12-07 03:16:50,235 DEBUG p.MobilePhone [main] test debug
+2022-12-07 03:17:11,546 ERROR p.MobilePhone [main] test error
+2022-12-07 03:17:11,551 INFO p.MobilePhone [main] test info
+2022-12-07 03:17:11,551 DEBUG p.MobilePhone [main] test debug

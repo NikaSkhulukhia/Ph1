@@ -1,6 +1,8 @@
 package phone;
 
 import interfaces.IUpdate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import person.Person;
 import phonedata.Call;
 import phonedata.Message;
@@ -15,6 +17,7 @@ import java.time.*;
 import java.util.Objects;
 
 public class MobilePhone extends Phone implements IUpdate {
+    private static final Logger logger = LogManager.getLogger();
     private String name;
     private Camera cameraFront;
     private Camera cameraRear;
@@ -67,6 +70,10 @@ public class MobilePhone extends Phone implements IUpdate {
             System.out.println("<" + this.getName() + ">: " + "Caller number: " + this.getPhoneNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: " + "Receiver number: " + receiverPhone.getPhoneNumber().getFullNumber());
             System.out.println("<" + this.getName() + ">: . . . ");
+            logger.error("test error");
+            logger.info("test info");
+            logger.debug("test debug");
+            logger.trace("test trace");
         }
     }
 
