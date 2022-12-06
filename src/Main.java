@@ -19,6 +19,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("<MAIN>: Starting simulation of the Phone.Phone app...");
         System.out.println("<MAIN>: . . .");
+        // test commit 
 
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465");
@@ -58,7 +59,7 @@ public class Main {
         phone1.endCall();
         phone3.startCall(phone2);
         phone2.sendMessage(phone1, "Hi, will call after lecture.");
-        phone1.changeBattery("nonremovable", "Samsung", 2000);
+        phone1.changeBattery("non-removable", "Samsung", 2000);
         phone2.charge(10);
         phone3.reset();
        // phone3.update();
