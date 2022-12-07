@@ -6,6 +6,8 @@ import phonedata.Number;
 import phonehardware.*;
 import phonedata.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public abstract class Phone implements ICall, IMessage, ICharge, IReset {
@@ -32,12 +34,79 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     public Phone() {
     }
 
-    public abstract void startCall(Phone receiverPhone);
-    public abstract void endCall();
-    public abstract void sendMessage(Phone receiverPhone, String messageText);
     public abstract void charge(int time);
     public abstract void changeBattery(String type, String brand, int capacity);
     public abstract void reset();
+
+    public void startCall(Phone receiverPhone) {
+            if (receiverPhone == null) {
+                throw new IllegalArgumentException("Receiver phone must not be null!");
+            } else if (this.isOnCall() || this.getCurrentCall() != null) {
+                System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Can not start the call, phone already in another call!");
+            } else if (receiverPhone.isOnCall() || receiverPhone.getCurrentCall() != null) {
+                System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Can not start the call, receiver phone already in another call!");
+            } else {
+                Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Call currentCall = new Call();
+                currentCall.setCallStartDate(currentDate);
+                currentCall.setCallerNumber(this.getPhoneNumber());
+                currentCall.setCallerPhone(this);
+                currentCall.setCallerPerson(this.getOwnerPerson());
+                currentCall.setReceiverNumber(receiverPhone.getPhoneNumber());
+                currentCall.setReceiverPhone(receiverPhone);
+                currentCall.setReceiverPerson(receiverPhone.getOwnerPerson());
+                receiverPhone.setCurrentCall(currentCall);
+                receiverPhone.setOnCall(true);
+                this.setCurrentCall(currentCall);
+                this.setOnCall(true);
+            }
+    }
+    public void endCall() {
+        if (!this.isOnCall() || this.getCurrentCall() == null) {
+            System.out.println("<" + this.getSerialNumber() + ">: " + "No current call to end!");
+            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
+        } else {
+            Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+            // end call for receiver
+            Phone receiverPhone = this.getCurrentCall().getReceiverPhone();
+            receiverPhone.getCurrentCall().setCallEndDate(currentDate);
+            receiverPhone.setLastCall(receiverPhone.getCurrentCall());
+            receiverPhone.setCurrentCall(null);
+            receiverPhone.setOnCall(false);
+            int receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 1;
+            receiverPhone.getBattery().setLife(receiverBatteryNewLife);
+
+            // end call for this phone
+            this.getCurrentCall().setCallEndDate(currentDate);
+            this.setLastCall(this.getCurrentCall());
+            this.setCurrentCall(null);
+            this.setOnCall(false);
+            int thisBatteryNewLife = this.getBattery().getLife() - 1;
+            this.getBattery().setLife(thisBatteryNewLife);
+        }
+    }
+    public void sendMessage(Phone receiverPhone, String messageText) {
+        if (receiverPhone == null) {
+            throw new IllegalArgumentException("Receiver phone must not be null!");
+        } else if (this.getBattery() == null || this.getBattery().getLife() <= 2) {
+            System.out.println("<" + this.getSerialNumber() + ">: " + "Can not send the message, charge your phone!");
+            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
+        } else {
+            Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Message message = new Message();
+            message.setMessageSendDate(currentDate);
+            message.setMessageText(messageText);
+            message.setMessageSenderPhone(this);
+            message.setMessageSenderNumber(this.getPhoneNumber());
+            message.setMessageSenderPerson(this.getOwnerPerson());
+            message.setMessageReceiverNumber(receiverPhone.getPhoneNumber());
+            message.setMessageReceiverPhone(receiverPhone);
+            message.setMessageReceiverPerson(receiverPhone.getOwnerPerson());
+            this.setLastMessageSent(message);
+            receiverPhone.setLastMessageReceived(message);
+        }
+    }
 
     public String getBrand() {
         return brand;

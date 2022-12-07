@@ -11,3 +11,11 @@
 2022-12-07 14:31:51,853 INFO p.MobilePhone [main] test info
 2022-12-07 14:31:51,853 DEBUG p.MobilePhone [main] test debug
 2022-12-07 14:31:51,853 TRACE p.MobilePhone [main] test trace
+2022-12-07 16:04:37,774 ERROR p.MobilePhone [main] test error
+2022-12-07 16:04:37,780 INFO p.MobilePhone [main] test info
+2022-12-07 16:04:37,780 DEBUG p.MobilePhone [main] test debug
+2022-12-07 16:04:37,781 TRACE p.MobilePhone [main] test trace
+2022-12-07 16:04:37,783 ERROR p.MobilePhone [main] test error
+2022-12-07 16:04:37,783 INFO p.MobilePhone [main] test info
+2022-12-07 16:04:37,783 DEBUG p.MobilePhone [main] test debug
+2022-12-07 16:04:37,784 TRACE p.MobilePhone [main] test trace
