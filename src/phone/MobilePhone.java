@@ -4,16 +4,12 @@ import interfaces.IUpdate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import person.Person;
-import phonedata.Call;
-import phonedata.Message;
 import phonehardware.Battery;
 import phonehardware.Camera;
 import phonehardware.Display;
-import phonesoftware.Software;
+import operationalsystem.OS;
 import phonedata.Number;
 
-import java.util.Date;
-import java.time.*;
 import java.util.Objects;
 
 public class MobilePhone extends Phone implements IUpdate {
@@ -22,7 +18,7 @@ public class MobilePhone extends Phone implements IUpdate {
     private Camera cameraFront;
     private Camera cameraRear;
     private Display display;
-    private Software software;
+    private OS OS;
 
     public MobilePhone(String name, String brand, String serialNumber, Number phoneNumber, Person ownerPerson) {
         this.name = name;
@@ -110,7 +106,7 @@ public class MobilePhone extends Phone implements IUpdate {
         System.out.println("<" + this.getName() + ">: . . . ");
     }
 
-    // reset memory, software, current call, last call, last message, isOnCall
+    // reset memory, OS, current call, last call, last message, isOnCall
     @Override
     public void reset() {
         this.setOnCall(false);
@@ -120,8 +116,8 @@ public class MobilePhone extends Phone implements IUpdate {
         this.setLastMessageReceived(null);
         if (this.getMemory() != null)
             this.getMemory().reset();
-        if (this.software != null)
-            this.software.reset();
+        if (this.OS != null)
+            this.OS.reset();
 
         // simulate/print reset
         System.out.println("<" + this.getName() + ">: " + "Reset successful");
@@ -130,13 +126,13 @@ public class MobilePhone extends Phone implements IUpdate {
 
     @Override
     public void update() {
-        if (this.software == null) {
-            System.out.println("<" + this.getName() + ">: " + "Update not successful, no software installed");
+        if (this.OS == null) {
+            System.out.println("<" + this.getName() + ">: " + "Update not successful, no OS installed");
         } else {
-            this.software.update();
+            this.OS.update();
             // simulate/print reset
             System.out.println("<" + this.getName() + ">: " + "Update successful");
-            System.out.println("<" + this.getName() + ">: " + "PhoneSoftware.Software new version: " + this.software.getVersion());
+            System.out.println("<" + this.getName() + ">: " + "PhoneSoftware.OS new version: " + this.OS.getVersion());
             System.out.println("<" + this.getName() + ">: . . . ");
         }
     }
@@ -163,14 +159,14 @@ public class MobilePhone extends Phone implements IUpdate {
                 && Objects.equals(cameraFront, that.cameraFront)
                 && Objects.equals(cameraRear, that.cameraRear)
                 && Objects.equals(display, that.display)
-                && Objects.equals(software, that.software)
+                && Objects.equals(OS, that.OS)
                 && Objects.equals(getSerialNumber(), that.getSerialNumber())
                 && Objects.equals(getBrand(), that.getBrand());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, cameraFront, cameraRear, display, software, getSerialNumber(), getBrand());
+        return Objects.hash(name, cameraFront, cameraRear, display, OS, getSerialNumber(), getBrand());
     }
 
     public String getName() {
@@ -205,11 +201,11 @@ public class MobilePhone extends Phone implements IUpdate {
         this.display = display;
     }
 
-    public Software getSoftware() {
-        return software;
+    public OS getSoftware() {
+        return OS;
     }
 
-    public void setSoftware(Software software) {
-        this.software = software;
+    public void setSoftware(OS OS) {
+        this.OS = OS;
     }
 }

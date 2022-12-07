@@ -1,10 +1,10 @@
-package phonesoftware;
+package operationalsystem;
 
-public class Software {
+public class OS {
     private String type;
     private int version; // greater or equal to zero, default 0;
 
-    public Software(String type, int version) {
+    public OS(String type, int version) {
         if (version < 0) {
             throw new IllegalArgumentException("Version must be greater or equal to zero!");
         } else {
@@ -13,7 +13,7 @@ public class Software {
         }
     }
 
-    public Software() {
+    public OS() {
     }
 
     // Reset software version to zero
@@ -28,7 +28,7 @@ public class Software {
 
     @Override
     public String toString() {
-        return "PhoneSoftware.Software{" +
+        return "PhoneSoftware.OS{" +
                 "type='" + type + '\'' +
                 ", version=" + version +
                 '}';

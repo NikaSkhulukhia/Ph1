@@ -6,8 +6,7 @@ import phone.Phone;
 import phone.StationaryPhone;
 import phonedata.Number;
 import phonehardware.Battery;
-import phonesoftware.Software;
-
+import operationalsystem.OS;
 
 
 public class Main {
@@ -48,9 +47,9 @@ public class Main {
         phone3.setBattery(bat3);
 
         // create software
-        Software soft1 = new Software("android", 11);
-        Software soft2 = new Software("iOS", 14);
-        Software soft3 = new Software("android", 12);
+        OS soft1 = new OS("android", 11);
+        OS soft2 = new OS("iOS", 14);
+        OS soft3 = new OS("android", 12);
         //phone1.setSoftware(soft1);
         //phone2.setSoftware(soft2);
         //phone3.setSoftware(soft3);
