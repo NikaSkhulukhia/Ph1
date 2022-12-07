@@ -1,2 +1,9 @@
 1. is "@override" used only for readability?
 
+2. if class Battery has int speed; (must be greater than 0)
+    and class Processor has  double speed; (must be greater than 1)
+
+    do we need 2 separate custom exceptions: IncorrectProcessorSpeedException , IncorrectBatterySpeedException ?
+    or just 1 - IncorrectSpeedException
+
+3. t
