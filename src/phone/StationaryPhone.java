@@ -74,8 +74,8 @@ public class StationaryPhone extends Phone{
     public String toString() {
         return "Phone.StationaryPhone{" +
                 "keyboard=" + getSerialNumber() +
-                "keyboard=" + getBrand() +
-                "keyboard=" + getOwnerPerson() +
+                "brand=" + getBrand() +
+                "owner=" + getOwnerPerson() +
                 "keyboard=" + keyboard +
                 ", hasWire=" + hasWire +
                 '}';
