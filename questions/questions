@@ -6,4 +6,9 @@
     do we need 2 separate custom exceptions: IncorrectProcessorSpeedException , IncorrectBatterySpeedException ?
     or just 1 - IncorrectSpeedException
 
-3. t
+3. exam question. Will you handle RuntimeExceptions in try-catch block?
+
+4. exam question. What log aggregators do you know?
+
+5.
+
