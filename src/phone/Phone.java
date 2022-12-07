@@ -1,6 +1,9 @@
 package phone;
 
+import exceptions.*;
 import interfaces.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import person.*;
 import phonedata.Number;
 import phonehardware.*;
@@ -11,6 +14,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public abstract class Phone implements ICall, IMessage, ICharge, IReset {
+    private static final Logger LOGGER = LogManager.getLogger();
     private String brand;
     private String serialNumber;
     private boolean isOnCall;
@@ -34,17 +38,17 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     public Phone() {
     }
 
-    public abstract void charge(int time);
+    public abstract void charge(int time) throws IncorrectTimeException, BatteryNotFoundException;
     public abstract void changeBattery(String type, String brand, int capacity);
     public abstract void reset();
 
-    public void startCall(Phone receiverPhone) {
+    public void startCall(Phone receiverPhone) throws PhoneNotFoundException, PhoneAlreadyOnCallException {
             if (receiverPhone == null) {
-                throw new IllegalArgumentException("Receiver phone must not be null!");
+                throw new PhoneNotFoundException("Receiver phone must not be null!", "phone is null");
             } else if (this.isOnCall() || this.getCurrentCall() != null) {
-                System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Can not start the call, phone already in another call!");
+                throw new PhoneAlreadyOnCallException("Can not start the call, caller phone already in another call!", "phone already on call");
             } else if (receiverPhone.isOnCall() || receiverPhone.getCurrentCall() != null) {
-                System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Can not start the call, receiver phone already in another call!");
+                throw new PhoneAlreadyOnCallException("Can not start the call, receiver phone already in another call!", "phone already on call");
             } else {
                 Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Call currentCall = new Call();
@@ -61,10 +65,9 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
                 this.setOnCall(true);
             }
     }
-    public void endCall() {
+    public void endCall() throws CallNotFoundException {
         if (!this.isOnCall() || this.getCurrentCall() == null) {
-            System.out.println("<" + this.getSerialNumber() + ">: " + "No current call to end!");
-            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
+            throw new CallNotFoundException("No current call to end!", "call not found");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
@@ -86,13 +89,15 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
             this.getBattery().setLife(thisBatteryNewLife);
         }
     }
-    public void sendMessage(Phone receiverPhone, String messageText) {
+    public void sendMessage(Phone receiverPhone, String messageText) throws PhoneNotFoundException, BatteryNotFoundException, BatteryLowException {
         if (receiverPhone == null) {
-            throw new IllegalArgumentException("Receiver phone must not be null!");
-        } else if (this.getBattery() == null || this.getBattery().getLife() <= 2) {
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Can not send the message, charge your phone!");
-            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
-        } else {
+            throw new PhoneNotFoundException("Receiver phone must not be null!", "phone is null");
+        } else if (this.getBattery() == null) {
+            throw new BatteryNotFoundException("Can not send the message, battery not installed", "battery is null");
+        } else if(this.getBattery().getLife() <= 2){
+            throw new BatteryLowException("Can not send the message, charge phone", "battery low");
+        }
+        else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Message message = new Message();
             message.setMessageSendDate(currentDate);

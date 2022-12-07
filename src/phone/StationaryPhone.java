@@ -1,5 +1,8 @@
 package phone;
 
+import exceptions.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import phonedata.Call;
 import phonedata.Message;
 import phonehardware.Keyboard;
@@ -10,6 +13,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class StationaryPhone extends Phone{
+    private static final Logger LOGGER = LogManager.getLogger();
     private Keyboard keyboard;
     private boolean hasWire;
 
@@ -23,36 +27,65 @@ public class StationaryPhone extends Phone{
 
     @Override
     public void startCall(Phone receiverPhone) {
+        try {
             super.startCall(receiverPhone);
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "PhoneData.Call started");
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: "
+            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call started");
+            LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call start date: "
                     + getCurrentCall().getCallStartDate().toString());
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Caller number: "
+            LOGGER.trace("<" + phTempName + ">: " + "Caller number: "
                     + this.getPhoneNumber().getFullNumber());
-            System.out.println("<" + this.getBrand() + "-" + this.getSerialNumber() + ">: " + "Receiver number: "
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: "
                     + receiverPhone.getPhoneNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: . . . ");
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("receiver phone: " + receiverPhone.toString());
+        } catch (PhoneAlreadyOnCallException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("isOnCall: " + isOnCall());
+            LOGGER.debug("currentCall: " + getCurrentCall());
+        }
     }
 
     @Override
     public void endCall() {
-        super.endCall();
-            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call Ended");
-            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallStartDate().toString());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Call start date: " + this.getLastCall().getCallEndDate().toString());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
-            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
+        try {
+            super.endCall();
+            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            LOGGER.trace("<" + phTempName + ">: " + "Call Ended");
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallStartDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallEndDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
+        } catch (CallNotFoundException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("isOnCall: " + isOnCall());
+            LOGGER.debug("currentCall: " + getCurrentCall());
+        }
     }
 
     @Override
     public void sendMessage(Phone receiverPhone, String messageText) {
-        super.sendMessage(receiverPhone, messageText);
-            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Message sent");
-            System.out.println("<" + this.getSerialNumber() + ">: " + "message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
-            System.out.println("<" + this.getSerialNumber() + ">: " + "PhoneData.Message text: " + this.getLastMessageSent().getMessageText());
-            System.out.println("<" + this.getSerialNumber() + ">: . . . ");
+        try {
+            super.sendMessage(receiverPhone, messageText);
+            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            LOGGER.trace("<" + phTempName + ">: " + "Message sent");
+            LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Message text: " + this.getLastMessageSent().getMessageText());
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("receiver phone: " + receiverPhone.toString());
+        } catch (BatteryNotFoundException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("battery: " + getBattery().toString());
+        } catch (BatteryLowException e) {
+            LOGGER.error(e.getMessage());
+            LOGGER.debug("battery: " + getBattery().toString());
+            LOGGER.debug("battery life: " + getBattery().getLife());
+        }
     }
 
     @Override

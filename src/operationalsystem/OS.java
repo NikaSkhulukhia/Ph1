@@ -1,12 +1,18 @@
 package operationalsystem;
 
+import exceptions.IncorrectOSVersionException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class OS {
+    private static final Logger LOGGER = LogManager.getLogger();
     private String type;
     private int version; // greater or equal to zero, default 0;
 
-    public OS(String type, int version) {
+    public OS(String type, int version) throws IncorrectOSVersionException {
         if (version < 0) {
-            throw new IllegalArgumentException("Version must be greater or equal to zero!");
+            LOGGER.debug("OS version" + version);
+            throw new IncorrectOSVersionException("OS version must be greater or equal to zero!", "OS version not correct");
         } else {
             this.type = type;
             this.version = version;
@@ -46,9 +52,10 @@ public class OS {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(int version) throws IncorrectOSVersionException {
         if (version < 0) {
-            throw new IllegalArgumentException("Version must be greater or equal to zero!");
+            LOGGER.debug("OS version" + version);
+            throw new IncorrectOSVersionException("OS version must be greater or equal to zero!", "OS version not correct");
         } else {
             this.version = version;
         }
