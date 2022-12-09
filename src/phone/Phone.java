@@ -11,7 +11,9 @@ import phonedata.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -34,6 +36,8 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     private Processor processor;
     private RAM ram;
     private Memory memory;
+    private List<Call> callLog = new ArrayList<>();
+    private List<Message> messages = new ArrayList<>();
 
     public Phone() {
     }
@@ -42,10 +46,15 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     public abstract void changeBattery(String type, String brand, int capacity);
     public abstract void reset();
 
+    /*
+    initiate call to another device
+    create Call object and save it to currentCall field for both devices.
+    phone can not start or receive a call if it is already in another call
+     */
     public void startCall(Phone receiverPhone) throws PhoneNotFoundException, PhoneAlreadyOnCallException {
             if (receiverPhone == null) {
                 throw new PhoneNotFoundException("Receiver phone must not be null!", "phone is null");
-            } else if (this.isOnCall() || this.getCurrentCall() != null) {
+            } else if (isOnCall() || getCurrentCall() != null) {
                 throw new PhoneAlreadyOnCallException("Can not start the call, caller phone already in another call!", "phone already on call");
             } else if (receiverPhone.isOnCall() || receiverPhone.getCurrentCall() != null) {
                 throw new PhoneAlreadyOnCallException("Can not start the call, receiver phone already in another call!", "phone already on call");
@@ -53,48 +62,68 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
                 Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Call currentCall = new Call();
                 currentCall.setCallStartDate(currentDate);
-                currentCall.setCallerNumber(this.getPhoneNumber());
+                currentCall.setCallerNumber(getPhoneNumber());
                 currentCall.setCallerPhone(this);
-                currentCall.setCallerPerson(this.getOwnerPerson());
+                currentCall.setCallerPerson(getOwnerPerson());
                 currentCall.setReceiverNumber(receiverPhone.getPhoneNumber());
                 currentCall.setReceiverPhone(receiverPhone);
                 currentCall.setReceiverPerson(receiverPhone.getOwnerPerson());
                 receiverPhone.setCurrentCall(currentCall);
                 receiverPhone.setOnCall(true);
-                this.setCurrentCall(currentCall);
-                this.setOnCall(true);
+                setCurrentCall(currentCall);
+                setOnCall(true);
             }
     }
+
+    /*
+    end call for both phones
+    save currentCall object inside callLog list for both phones
+    after the call battery life is decreased by 1 for both involved phones
+     */
     public void endCall() throws CallNotFoundException {
-        if (!this.isOnCall() || this.getCurrentCall() == null) {
+        if (!isOnCall() || getCurrentCall() == null) {
             throw new CallNotFoundException("No current call to end!", "call not found");
         } else {
             Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
             // end call for receiver
-            Phone receiverPhone = this.getCurrentCall().getReceiverPhone();
+            Phone receiverPhone = getCurrentCall().getReceiverPhone();
             receiverPhone.getCurrentCall().setCallEndDate(currentDate);
             receiverPhone.setLastCall(receiverPhone.getCurrentCall());
+            receiverPhone.callLog.add(receiverPhone.getCurrentCall());
             receiverPhone.setCurrentCall(null);
             receiverPhone.setOnCall(false);
             int receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 1;
-            receiverPhone.getBattery().setLife(receiverBatteryNewLife);
+            try {
+                receiverPhone.getBattery().setLife(receiverBatteryNewLife);
+            } catch (IncorrectBatteryLifeException e) {
+                LOGGER.error(e.getMessage());
+            }
 
             // end call for this phone
-            this.getCurrentCall().setCallEndDate(currentDate);
-            this.setLastCall(this.getCurrentCall());
-            this.setCurrentCall(null);
-            this.setOnCall(false);
-            int thisBatteryNewLife = this.getBattery().getLife() - 1;
-            this.getBattery().setLife(thisBatteryNewLife);
+            getCurrentCall().setCallEndDate(currentDate);
+            setLastCall(getCurrentCall());
+            callLog.add(getCurrentCall()); // addToCallLOg(call);
+            setCurrentCall(null);
+            setOnCall(false);
+            int thisBatteryNewLife = getBattery().getLife() - 1;
+            try {
+                getBattery().setLife(thisBatteryNewLife);
+            } catch (IncorrectBatteryLifeException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
+
+    /*
+    phone can not send a message if the battery life is less or equal to 2
+     */
     public void sendMessage(Phone receiverPhone, String messageText) throws PhoneNotFoundException, BatteryNotFoundException, BatteryLowException {
         if (receiverPhone == null) {
             throw new PhoneNotFoundException("Receiver phone must not be null!", "phone is null");
-        } else if (this.getBattery() == null) {
+        } else if (getBattery() == null) {
             throw new BatteryNotFoundException("Can not send the message, battery not installed", "battery is null");
-        } else if(this.getBattery().getLife() <= 2){
+        } else if(getBattery().getLife() <= 2){
             throw new BatteryLowException("Can not send the message, charge phone", "battery low");
         }
         else {
@@ -103,13 +132,15 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
             message.setMessageSendDate(currentDate);
             message.setMessageText(messageText);
             message.setMessageSenderPhone(this);
-            message.setMessageSenderNumber(this.getPhoneNumber());
-            message.setMessageSenderPerson(this.getOwnerPerson());
+            message.setMessageSenderNumber(getPhoneNumber());
+            message.setMessageSenderPerson(getOwnerPerson());
             message.setMessageReceiverNumber(receiverPhone.getPhoneNumber());
             message.setMessageReceiverPhone(receiverPhone);
             message.setMessageReceiverPerson(receiverPhone.getOwnerPerson());
-            this.setLastMessageSent(message);
+            setLastMessageSent(message);
+            messages.add(message);
             receiverPhone.setLastMessageReceived(message);
+            receiverPhone.messages.add(message);
         }
     }
 
@@ -264,4 +295,21 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     public void setBuild(String build) {
         this.build = build;
     }
+
+    public List<Call> getCallLog() {
+        return callLog;
+    }
+
+    public void setCallLog(List<Call> callLog) {
+        this.callLog = callLog;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
 }

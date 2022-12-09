@@ -1,5 +1,8 @@
 package phonehardware;
 
+import exceptions.IncorrectBatteryLifeException;
+import exceptions.IncorrectCapacityException;
+
 import java.util.Objects;
 
 public class Battery extends PhoneParts{
@@ -7,13 +10,13 @@ public class Battery extends PhoneParts{
     private int capacity; // greater than zero, default 1000
     private int life; // greater or equal to 0 AND less or equal to 100, default 100
 
-    public Battery(String brand, String type, int capacity, int life) {
+    public Battery(String brand, String type, int capacity, int life) throws IncorrectCapacityException, IncorrectBatteryLifeException {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!", "incorrect capacity");
         } else if (life < 0 || life > 100) {
-            throw new IllegalArgumentException("life must be between 0 - 100 !");
+            throw new IncorrectBatteryLifeException("life must be between 0 - 100 !", "incorrect battery life");
         } else {
-            this.setBrand(brand);
+            setBrand(brand);
             this.type = type;
             this.capacity = capacity;
             this.life = life;
@@ -27,14 +30,14 @@ public class Battery extends PhoneParts{
 
     @Override
     public boolean isUsable() {
-        return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        String result = "This is " + this.type + " battery, with volume of "
-                + this.capacity + " mAH, made by " + this.getBrand() + ".";
-        result += " Currently it is charged for " + this.life + "%.";
+        String result = "This is " + type + " battery, with volume of "
+                + capacity + " mAH, made by " + getBrand() + ".";
+        result += " Currently it is charged for " + life + "%.";
         return result;
     }
 
@@ -69,9 +72,9 @@ public class Battery extends PhoneParts{
         this.type = type;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(int capacity) throws IncorrectCapacityException {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!", "incorrect capacity");
         } else {
             this.capacity = capacity;
         }
@@ -81,9 +84,9 @@ public class Battery extends PhoneParts{
         return life;
     }
 
-    public void setLife(int life) {
+    public void setLife(int life) throws IncorrectBatteryLifeException {
         if (life < 0 || life > 100) {
-            throw new IllegalArgumentException("life must be between 0 - 100 !");
+            throw new IncorrectBatteryLifeException("life must be between 0 - 100 !", "incorrect battery life");
         } else {
             this.life = life;
         }

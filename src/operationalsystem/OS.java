@@ -4,6 +4,8 @@ import exceptions.IncorrectOSVersionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 public class OS {
     private static final Logger LOGGER = LogManager.getLogger();
     private String type;
@@ -24,12 +26,12 @@ public class OS {
 
     // Reset software version to zero
     public void reset() {
-        this.version = 0;
+        version = 0;
     }
 
     // increase software version by one
     public void update() {
-        this.version++;
+        version++;
     }
 
     @Override
@@ -38,6 +40,20 @@ public class OS {
                 "type='" + type + '\'' +
                 ", version=" + version +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        OS os = (OS) o;
+        return version == os.version && Objects.equals(type, os.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, version);
     }
 
     public String getType() {

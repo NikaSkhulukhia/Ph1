@@ -8,6 +8,10 @@ public class IncorrectHardwareVolumeException extends Exception {
         this.desc = desc;
     }
 
+    public IncorrectHardwareVolumeException(String message) {
+        super(message);
+    }
+
     public String getDesc() {
         return desc;
     }

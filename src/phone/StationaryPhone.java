@@ -29,12 +29,12 @@ public class StationaryPhone extends Phone{
     public void startCall(Phone receiverPhone) {
         try {
             super.startCall(receiverPhone);
-            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            String phTempName = getBrand() + "-ST-" + getSerialNumber();
             LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call started");
             LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call start date: "
                     + getCurrentCall().getCallStartDate().toString());
             LOGGER.trace("<" + phTempName + ">: " + "Caller number: "
-                    + this.getPhoneNumber().getFullNumber());
+                    + getPhoneNumber().getFullNumber());
             LOGGER.trace("<" + phTempName + ">: " + "Receiver number: "
                     + receiverPhone.getPhoneNumber().getFullNumber());
             LOGGER.trace("<" + phTempName + ">: . . . ");
@@ -52,12 +52,12 @@ public class StationaryPhone extends Phone{
     public void endCall() {
         try {
             super.endCall();
-            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            String phTempName = getBrand() + "-ST-" + getSerialNumber();
             LOGGER.trace("<" + phTempName + ">: " + "Call Ended");
-            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallStartDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallEndDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallStartDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallEndDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + getLastCall().getCallerNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + getLastCall().getReceiverNumber().getFullNumber());
         } catch (CallNotFoundException e) {
             LOGGER.error(e.getMessage());
             LOGGER.debug("isOnCall: " + isOnCall());
@@ -69,12 +69,12 @@ public class StationaryPhone extends Phone{
     public void sendMessage(Phone receiverPhone, String messageText) {
         try {
             super.sendMessage(receiverPhone, messageText);
-            String phTempName = this.getBrand() + "-ST-" + this.getSerialNumber();
+            String phTempName = getBrand() + "-ST-" + getSerialNumber();
             LOGGER.trace("<" + phTempName + ">: " + "Message sent");
-            LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Message text: " + this.getLastMessageSent().getMessageText());
+            LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + getLastMessageSent().getMessageSendDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + getLastMessageSent().getMessageSenderNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + getLastMessageSent().getMessageReceiverNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Message text: " + getLastMessageSent().getMessageText());
         } catch (PhoneNotFoundException e) {
             LOGGER.error(e.getMessage());
             LOGGER.debug("receiver phone: " + receiverPhone.toString());

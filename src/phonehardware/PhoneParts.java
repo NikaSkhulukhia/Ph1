@@ -1,5 +1,7 @@
 package phonehardware;
 
+import exceptions.IncorrectHardwareHealthException;
+
 public abstract class PhoneParts {
     private String serialNumber;
     private String brand;
@@ -52,9 +54,9 @@ public abstract class PhoneParts {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(int health) throws IncorrectHardwareHealthException {
         if (health < 0) {
-            throw new IllegalArgumentException("Health must be greater or equal to zero");
+            throw new IncorrectHardwareHealthException("Health must be greater or equal to zero", "incorrect health");
         } else {
             this.health = health;
         }
@@ -66,16 +68,5 @@ public abstract class PhoneParts {
 
     public void setHealthLimitForStatus(int healthLimitForStatus) {
         this.healthLimitForStatus = healthLimitForStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "PhoneParts.PhoneParts{" +
-                "serialNumber='" + serialNumber + '\'' +
-                ", brand='" + brand + '\'' +
-                ", name='" + name + '\'' +
-                ", health=" + health +
-                ", healthLimitForStatus=" + healthLimitForStatus +
-                '}';
     }
 }

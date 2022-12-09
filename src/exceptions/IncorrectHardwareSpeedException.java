@@ -8,6 +8,10 @@ public class IncorrectHardwareSpeedException extends Exception {
         this.desc = desc;
     }
 
+    public IncorrectHardwareSpeedException(String message) {
+        super(message);
+    }
+
     public String getDesc() {
         return desc;
     }

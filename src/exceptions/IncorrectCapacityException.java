@@ -8,6 +8,10 @@ public class IncorrectCapacityException extends Exception {
         this.desc = desc;
     }
 
+    public IncorrectCapacityException(String message) {
+        super(message);
+    }
+
     public String getDesc() {
         return desc;
     }

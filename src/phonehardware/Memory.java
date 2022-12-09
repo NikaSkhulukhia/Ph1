@@ -1,5 +1,8 @@
 package phonehardware;
 
+import exceptions.IncorrectCapacityException;
+import exceptions.IncorrectHardwareVolumeException;
+
 import java.util.Objects;
 
 public class Memory extends PhoneParts{
@@ -7,13 +10,13 @@ public class Memory extends PhoneParts{
     private int volumeUsed; // greater or equal to zero. default 0
     private int volumeFree; // greater or equal to zero. default same as capacity
 
-    public Memory(String brand, int capacity, int volumeUsed) {
+    public Memory(String brand, int capacity, int volumeUsed) throws IncorrectCapacityException, IncorrectHardwareVolumeException {
         if (capacity == 0)
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!", "incorrect capacity");
         else if (volumeUsed < 0){
-            throw new IllegalArgumentException("volumeUsed must be greater or equal to zero!");
+            throw new IncorrectHardwareVolumeException("volumeUsed must be greater or equal to zero!", "incorrect volume");
         } else if (volumeUsed > capacity) {
-            throw new IllegalArgumentException("volumeUsed must be less or equal to total capacity!");
+            throw new IncorrectHardwareVolumeException("volumeUsed must be less or equal to total capacity!", "incorrect volume");
         } else {
             setBrand(brand);
             this.capacity = capacity;
@@ -23,14 +26,14 @@ public class Memory extends PhoneParts{
     }
 
     public Memory(){
-        this.capacity = 4;
-        this.volumeUsed = 0;
-        this.volumeFree = this.capacity;
+        capacity = 4;
+        volumeUsed = 0;
+        volumeFree = capacity;
     }
 
     @Override
     public boolean isUsable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -62,17 +65,17 @@ public class Memory extends PhoneParts{
     }
 
     public void reset() {
-        this.volumeUsed = 0;
-        this.volumeFree = this.capacity;
+        volumeUsed = 0;
+        volumeFree = capacity;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(int capacity) throws IncorrectCapacityException {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!");
         } else {
             this.capacity = capacity;
         }
@@ -82,11 +85,11 @@ public class Memory extends PhoneParts{
         return volumeUsed;
     }
 
-    public void setVolumeUsed(int volumeUsed) {
+    public void setVolumeUsed(int volumeUsed) throws IncorrectCapacityException, IncorrectHardwareVolumeException {
         if (this.capacity == 0)
-            throw new IllegalArgumentException("You must set total capacity greater than zero first!");
+            throw new IncorrectCapacityException("You must set total capacity greater than zero first!");
         else if (volumeUsed < 0){
-            throw new IllegalArgumentException("volumeUsed must be greater or equal to zero!");
+            throw new IncorrectHardwareVolumeException("volumeUsed must be greater or equal to zero!");
         } else if (volumeUsed > this.capacity) {
             throw new IllegalArgumentException("volumeUsed must be less or equal to total capacity!");
         } else {

@@ -5,26 +5,21 @@ import java.util.Objects;
 public class Display extends PhoneParts {
     private String type;
     private String resolution;
-    private double size; // greater than zero, default 1
+    private double size;
 
     public Display(String brand, String type, String resolution, double size) {
-        if (size <= 0){
-            throw new IllegalArgumentException("size must be greater than zero!");
-        } else {
             setBrand(brand);
             this.type = type;
             this.resolution = resolution;
             this.size = size;
-        }
     }
 
     public Display() {
-        this.size = 1;
     }
 
     @Override
     public boolean isUsable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -76,10 +71,6 @@ public class Display extends PhoneParts {
     }
 
     public void setSize(double size) {
-        if (size <= 0){
-            throw new IllegalArgumentException("size must be greater than zero!");
-        } else {
-            this.size = size;
-        }
+        this.size = size;
     }
 }

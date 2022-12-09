@@ -8,6 +8,10 @@ public class IncorrectCameraMPException extends Exception {
         this.desc = desc;
     }
 
+    public IncorrectCameraMPException(String message) {
+        super(message);
+    }
+
     public String getDesc() {
         return desc;
     }

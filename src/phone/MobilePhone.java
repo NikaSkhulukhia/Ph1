@@ -10,7 +10,6 @@ import phonehardware.Camera;
 import phonehardware.Display;
 import operationalsystem.OS;
 import phonedata.Number;
-
 import java.util.Objects;
 
 public class MobilePhone extends Phone implements IUpdate {
@@ -32,16 +31,14 @@ public class MobilePhone extends Phone implements IUpdate {
     public MobilePhone() {
     }
 
-    // Phone.Phone can not start a call if the battery life is less or equal to 5%
-    // phone can not start or receive a call if it is already in another call
     @Override
     public void startCall(Phone receiverPhone) {
         try {
             super.startCall(receiverPhone);
-            String phTempName = this.getName();
+            String phTempName = getName();
             LOGGER.trace("<" + phTempName + ">: " + "Call started");
             LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getCurrentCall().getCallStartDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + this.getPhoneNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + getPhoneNumber().getFullNumber());
             LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + receiverPhone.getPhoneNumber().getFullNumber());
         } catch (PhoneNotFoundException e) {
             LOGGER.error(e.getMessage());
@@ -55,16 +52,15 @@ public class MobilePhone extends Phone implements IUpdate {
         }
     }
 
-    // after the call battery life is decreased by 1% for both involved phones
     public void endCall() {
         try {
             super.endCall();
-            String phTempName = this.getName();
+            String phTempName = getName();
             LOGGER.trace("<" + phTempName + ">: " + "Call Ended");
-            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallStartDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + this.getLastCall().getCallEndDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + this.getLastCall().getCallerNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastCall().getReceiverNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallStartDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallEndDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Caller number: " + getLastCall().getCallerNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + getLastCall().getReceiverNumber().getFullNumber());
         } catch (CallNotFoundException e) {
             LOGGER.error(e.getMessage());
             LOGGER.debug("isOnCall: " + isOnCall());
@@ -72,16 +68,15 @@ public class MobilePhone extends Phone implements IUpdate {
         }
     }
 
-    //phone can not send a message if the battery life is less or equal to 2%
     public void sendMessage(Phone receiverPhone, String messageText) {
         try {
             super.sendMessage(receiverPhone, messageText);
-            String phTempName = this.getName();
+            String phTempName = getName();
             LOGGER.trace("<" + phTempName + ">: " + "Message sent");
-            LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + this.getLastMessageSent().getMessageSendDate().toString());
-            LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + this.getLastMessageSent().getMessageSenderNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + this.getLastMessageSent().getMessageReceiverNumber().getFullNumber());
-            LOGGER.trace("<" + phTempName + ">: " + "Message text: " + this.getLastMessageSent().getMessageText());
+            LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + getLastMessageSent().getMessageSendDate().toString());
+            LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + getLastMessageSent().getMessageSenderNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Receiver number: " + getLastMessageSent().getMessageReceiverNumber().getFullNumber());
+            LOGGER.trace("<" + phTempName + ">: " + "Message text: " + getLastMessageSent().getMessageText());
         } catch (PhoneNotFoundException e) {
             LOGGER.error(e.getMessage());
             LOGGER.debug("receiver phone: " + receiverPhone.toString());
@@ -101,61 +96,69 @@ public class MobilePhone extends Phone implements IUpdate {
     public void charge(int time) throws IncorrectTimeException, BatteryNotFoundException {
         if (time < 0) {
             throw new IncorrectTimeException("Time must be greater than zero!", "negative time");
-        } else if (this.getBattery() == null) {
+        } else if (getBattery() == null) {
             throw new BatteryNotFoundException("No battery installed! Please insert the battery!", "battery is null");
         } else {
-            int batteryCurrentLife = this.getBattery().getLife();
+            int batteryCurrentLife = getBattery().getLife();
             int batteryNewLife = batteryCurrentLife + time;
             if (batteryNewLife > 100)
                 batteryNewLife = 100;
-            this.getBattery().setLife(batteryNewLife);
-            String phTempName = this.getName();
+            try {
+                getBattery().setLife(batteryNewLife);
+            } catch (IncorrectBatteryLifeException e) {
+                LOGGER.error(e.getMessage());
+            }
+            String phTempName = getName();
             LOGGER.trace("<" + phTempName + ">: " + "Phone.Phone charged");
             LOGGER.trace("<" + phTempName + ">: " + "Charging time: " + time);
-            LOGGER.trace("<" + phTempName + ">: " + "Battery current life: " + this.getBattery().getLife());
+            LOGGER.trace("<" + phTempName + ">: " + "Battery current life: " + getBattery().getLife());
         }
     }
 
     @Override
     public void changeBattery(String type, String brand, int capacity) {
-        this.setBattery(new Battery());
-        this.getBattery().setType(type);
-        this.getBattery().setBrand(brand);
-        this.getBattery().setCapacity(capacity);
-        String phTempName = this.getName();
+        setBattery(new Battery());
+        getBattery().setType(type);
+        getBattery().setBrand(brand);
+        try {
+            getBattery().setCapacity(capacity);
+        } catch (IncorrectCapacityException e) {
+            LOGGER.error(e.getMessage());
+        }
+        String phTempName = getName();
         LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery change successful");
         LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery type: " + type);
         LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery brand: " + brand);
         LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery capacity: " + capacity);
-        LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery current life: " + this.getBattery().getLife());
+        LOGGER.trace("<" + phTempName + ">: " + "PhoneParts.Battery current life: " + getBattery().getLife());
     }
 
     // reset memory, OS, current call, last call, last message, isOnCall
     @Override
     public void reset() {
-        this.setOnCall(false);
-        this.setCurrentCall(null);
-        this.setLastCall(null);
-        this.setLastMessageSent(null);
-        this.setLastMessageReceived(null);
-        if (this.getMemory() != null)
-            this.getMemory().reset();
-        if (this.OS != null)
-            this.OS.reset();
+        setOnCall(false);
+        setCurrentCall(null);
+        setLastCall(null);
+        setLastMessageSent(null);
+        setLastMessageReceived(null);
+        if (getMemory() != null)
+            getMemory().reset();
+        if (OS != null)
+            OS.reset();
 
-        String phTempName = this.getName();
+        String phTempName = getName();
         LOGGER.trace("<" + phTempName + ">: " + "Reset successful");
     }
 
     @Override
     public void update() throws OSNotFoundException {
-        String phTempName = this.getName();
-        if (this.OS == null) {
+        String phTempName = getName();
+        if (OS == null) {
             throw new OSNotFoundException("Update not successful, no OS installed", "OS is null");
         } else {
-            this.OS.update();
+            OS.update();
             LOGGER.trace("<" + phTempName + ">: " + "Update successful");
-            LOGGER.trace("<" + phTempName + ">: " + "PhoneSoftware.OS new version: " + this.OS.getVersion());
+            LOGGER.trace("<" + phTempName + ">: " + "PhoneSoftware.OS new version: " + OS.getVersion());
         }
     }
 

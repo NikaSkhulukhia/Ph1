@@ -8,6 +8,10 @@ public class IncorrectProcessorCoreNumException extends Exception {
         this.desc = desc;
     }
 
+    public IncorrectProcessorCoreNumException(String message) {
+        super(message);
+    }
+
     public String getDesc() {
         return desc;
     }

@@ -1,6 +1,4 @@
-import exceptions.BatteryNotFoundException;
-import exceptions.IncorrectOSVersionException;
-import exceptions.IncorrectTimeException;
+import exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import person.Person;
@@ -23,7 +21,7 @@ public class Main {
     4. phone can not send a message if the battery life is less or equal to 2%
      */
     public static void main(String[] args) {
-        LOGGER.trace("Starting simulation of the Phone.Phone app...");
+        LOGGER.trace("Starting simulation of the Phone app...");
 
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465");
@@ -41,9 +39,30 @@ public class Main {
 
 
         // create essential hardware for phones
-        Battery bat1 = new Battery("Samsung", "removable", 3000, 100);
-        Battery bat2 = new Battery("iPhone", "removable", 4000, 44);
-        Battery bat3 = new Battery("Sony", "removable", 5000, 100);
+        Battery bat1 = null;
+        try {
+            bat1 = new Battery("Samsung", "removable", 3000, 100);
+        } catch (IncorrectCapacityException e) {
+            throw new RuntimeException(e);
+        } catch (IncorrectBatteryLifeException e) {
+            throw new RuntimeException(e);
+        }
+        Battery bat2 = null;
+        try {
+            bat2 = new Battery("iPhone", "removable", 4000, 44);
+        } catch (IncorrectCapacityException e) {
+            throw new RuntimeException(e);
+        } catch (IncorrectBatteryLifeException e) {
+            throw new RuntimeException(e);
+        }
+        Battery bat3 = null;
+        try {
+            bat3 = new Battery("Sony", "removable", 5000, 100);
+        } catch (IncorrectCapacityException e) {
+            throw new RuntimeException(e);
+        } catch (IncorrectBatteryLifeException e) {
+            throw new RuntimeException(e);
+        }
         phone1.setBattery(bat1);
         phone2.setBattery(bat2);
         phone3.setBattery(bat3);

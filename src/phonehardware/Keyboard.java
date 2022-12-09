@@ -1,12 +1,13 @@
 package phonehardware;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Keyboard extends PhoneParts{
-    private String[] buttons;
+    private List<String> buttons = new ArrayList<>();
 
-    public Keyboard(String[] buttons) {
+    public Keyboard(List<String> buttons) {
         this.buttons = buttons;
     }
 
@@ -20,10 +21,8 @@ public class Keyboard extends PhoneParts{
 
     @Override
     public String toString() {
-        return "PhoneParts.Keyboard{" +
-                "brand=" + getBrand() +
-                "serial=" + getSerialNumber() +
-                "buttons=" + Arrays.toString(buttons) +
+        return "Keyboard{" +
+                "buttons=" + buttons +
                 '}';
     }
 
@@ -33,21 +32,19 @@ public class Keyboard extends PhoneParts{
         if (o == null || getClass() != o.getClass()) return false;
         if (this.hashCode() != o.hashCode()) return false;
         Keyboard keyboard = (Keyboard) o;
-        return Arrays.equals(buttons, keyboard.buttons)
-                && Objects.equals(getBrand(), keyboard.getBrand())
-                && Objects.equals(getSerialNumber(), keyboard.getSerialNumber());
+        return Objects.equals(buttons, keyboard.buttons);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buttons, getSerialNumber(), getBrand());
+        return Objects.hash(buttons);
     }
 
-    public String[] getButtons() {
+    public List<String> getButtons() {
         return buttons;
     }
 
-    public void setButtons(String[] buttons) {
+    public void setButtons(List<String> buttons) {
         this.buttons = buttons;
     }
 }

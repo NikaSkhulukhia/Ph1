@@ -7,7 +7,7 @@ import phone.Phone;
 
 public interface IMessage {
     /*
-    Send message (if possible) to another device
+    Send message (if possible) from one device to another device
      */
     void sendMessage(Phone receiverPhone, String messageText) throws PhoneNotFoundException, BatteryNotFoundException, BatteryLowException;
 }

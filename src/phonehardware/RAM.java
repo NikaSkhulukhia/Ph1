@@ -1,13 +1,15 @@
 package phonehardware;
 
+import exceptions.IncorrectCapacityException;
+
 import java.util.Objects;
 
 public class RAM extends PhoneParts{
     private int capacity; // greater than zero. default 2
 
-    public RAM(String brand, int capacity) {
+    public RAM(String brand, int capacity) throws IncorrectCapacityException {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!");
         } else {
             setBrand(brand);
             this.capacity = capacity;
@@ -15,7 +17,7 @@ public class RAM extends PhoneParts{
     }
 
     public RAM() {
-        this.capacity = 2;
+        capacity = 2;
     }
 
     @Override
@@ -51,9 +53,9 @@ public class RAM extends PhoneParts{
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(int capacity) throws IncorrectCapacityException {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity must be greater than zero!");
+            throw new IncorrectCapacityException("capacity must be greater than zero!");
         } else {
             this.capacity = capacity;
         }

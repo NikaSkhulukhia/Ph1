@@ -10,8 +10,6 @@
 
 4. exam question. What log aggregators do you know?
 
-5. change MobilePhone phone1  ->  Phone phone1. Main class.
-
 6. how to include date and time in log file name? log4j properties.
 
 7. does throwing exception interrupt the method?

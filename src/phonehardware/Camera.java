@@ -1,5 +1,7 @@
 package phonehardware;
 
+import exceptions.IncorrectCameraMPException;
+
 import java.util.Objects;
 
 public class Camera extends PhoneParts{
@@ -7,9 +9,9 @@ public class Camera extends PhoneParts{
     private int MP; // MegaPixels, greater than zero, default 1
     private String type;
 
-    public Camera(boolean hasFlash, int MP, String type) {
+    public Camera(boolean hasFlash, int MP, String type) throws IncorrectCameraMPException {
         if (MP <= 0) {
-            throw new IllegalArgumentException("MP must be greater than zero!");
+            throw new IncorrectCameraMPException("MP must be greater than zero!");
         }
         else {
             this.hasFlash = hasFlash;
@@ -19,12 +21,12 @@ public class Camera extends PhoneParts{
     }
 
     public Camera() {
-        this.MP = 1;
+        MP = 1;
     }
 
     @Override
     public boolean isUsable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -63,9 +65,9 @@ public class Camera extends PhoneParts{
         return MP;
     }
 
-    public void setMP(int MP) {
+    public void setMP(int MP) throws IncorrectCameraMPException {
         if (MP <= 0) {
-            throw new IllegalArgumentException("MP must be greater than zero!");
+            throw new IncorrectCameraMPException("MP must be greater than zero!");
         }
         else {
             this.MP = MP;

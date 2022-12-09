@@ -1,16 +1,19 @@
 package phonehardware;
 
+import exceptions.IncorrectHardwareSpeedException;
+import exceptions.IncorrectProcessorCoreNumException;
+
 import java.util.Objects;
 
 public class Processor extends PhoneParts{
     private int coreNum; // greater than zero. default 1
     private double speed; // greater than zero. default 1
 
-    public Processor(String brand, int coreNum, double speed) {
+    public Processor(String brand, int coreNum, double speed) throws IncorrectProcessorCoreNumException, IncorrectHardwareSpeedException {
         if (coreNum <= 0) {
-            throw new IllegalArgumentException("coreNum must be greater than zero!");
+            throw new IncorrectProcessorCoreNumException("coreNum must be greater than zero!");
         } else if (speed <= 0) {
-            throw new IllegalArgumentException("speed must be greater than zero!");
+            throw new IncorrectHardwareSpeedException("speed must be greater than zero!");
         } else {
             setBrand(brand);
             this.coreNum = coreNum;
@@ -19,13 +22,13 @@ public class Processor extends PhoneParts{
     }
 
     public Processor() {
-        this.coreNum = 1;
-        this.speed = 1;
+        coreNum = 1;
+        speed = 1;
     }
 
     @Override
     public boolean isUsable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -57,9 +60,9 @@ public class Processor extends PhoneParts{
         return coreNum;
     }
 
-    public void setCoreNum(int coreNum) {
+    public void setCoreNum(int coreNum) throws IncorrectProcessorCoreNumException {
         if (coreNum <= 0) {
-            throw new IllegalArgumentException("coreNum must be greater than zero!");
+            throw new IncorrectProcessorCoreNumException("coreNum must be greater than zero!");
         } else {
             this.coreNum = coreNum;
         }
@@ -69,9 +72,9 @@ public class Processor extends PhoneParts{
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(double speed) throws IncorrectHardwareSpeedException {
         if (speed <= 0) {
-            throw new IllegalArgumentException("speed must be greater than zero!");
+            throw new IncorrectHardwareSpeedException("speed must be greater than zero!");
         } else {
             this.speed = speed;
         }

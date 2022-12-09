@@ -4,6 +4,7 @@ import phone.Phone;
 import phonedata.Number;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Person {
     private String firstName;
@@ -32,6 +33,22 @@ public class Person {
                 ", birthDate=" + birthDate +
                 ", phoneNumber=" + phoneNumber +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName)
+                && Objects.equals(idNumber, person.idNumber) && Objects.equals(birthDate, person.birthDate)
+                && Objects.equals(phoneNumber, person.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, idNumber, birthDate, phoneNumber);
     }
 
     public String getFirstName() {
