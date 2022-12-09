@@ -39,29 +39,32 @@ public class Main {
 
 
         // create essential hardware for phones
-        Battery bat1 = null;
+        Battery bat1;
+        bat1 = null;
         try {
             bat1 = new Battery("Samsung", "removable", 3000, 100);
         } catch (IncorrectCapacityException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         }
-        Battery bat2 = null;
+        Battery bat2;
+        bat2 = null;
         try {
             bat2 = new Battery("iPhone", "removable", 4000, 44);
         } catch (IncorrectCapacityException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         }
-        Battery bat3 = null;
+        Battery bat3;
+        bat3 = null;
         try {
             bat3 = new Battery("Sony", "removable", 5000, 100);
         } catch (IncorrectCapacityException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage());
         }
         phone1.setBattery(bat1);
         phone2.setBattery(bat2);
@@ -139,9 +142,9 @@ public class Main {
             LOGGER.error(e.getMessage());
         }
         phone3.reset();
-       // phone3.update();
-
-
+        // phone3.update();
+        LOGGER.trace("get phone1 call log");
+        phone1.getCallLog().forEach(c -> LOGGER.trace(c.toString()));
         LOGGER.trace("Ending simulation of the Phone app...");
     }
 }

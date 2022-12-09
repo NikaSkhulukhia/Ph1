@@ -20,7 +20,7 @@ public final class Number {
     /*
     number is built by pre-index ("+"), index (numeric string like: "577"), number (numeric string like: 12344325)
      */
-    public final String getFullNumber(){
+    public String getFullNumber(){
         return PRE_INDEX + " " + index + " " + number;
     }
 

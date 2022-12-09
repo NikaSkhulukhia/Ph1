@@ -3,13 +3,8 @@ package phone;
 import exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import phonedata.Call;
-import phonedata.Message;
 import phonehardware.Keyboard;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 public class StationaryPhone extends Phone{
