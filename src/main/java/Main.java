@@ -16,7 +16,7 @@ public class Main {
     Main method to run the phone application and simulate calls/messages.
      */
     public static void main(String[] args) {
-        LOGGER.trace("Starting simulation of the Phone app...");
+        LOGGER.trace("START simulation of the Phone app...");
 
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465");
@@ -139,7 +139,14 @@ public class Main {
         phone3.reset();
         // phone3.update();
         LOGGER.trace("get phone1 call log");
-        phone1.getCallLog().forEach(c -> LOGGER.trace(c.toString()));
-        LOGGER.trace("Ending simulation of the Phone app...");
+        phone1.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
+               + c.getReceiverNumber().getFullNumber()));
+        LOGGER.trace("get phone2 call log");
+        phone2.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
+                + c.getReceiverNumber().getFullNumber()));
+        LOGGER.trace("get phone3 call log");
+        phone3.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
+                + c.getReceiverNumber().getFullNumber()));
+        LOGGER.trace("END simulation of the Phone app...");
     }
 }
