@@ -13,12 +13,7 @@ import operationalsystem.OS;
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
     /*\
-    Main method to run the phone application and simulate calls.
-    Rules for phone call/message:
-    1. Phone.Phone can not start a call if the battery life is less or equal to 5%
-    2. phone can not start or receive a call if it is already in another call
-    3. after the call battery life is decreased by 1% for both involved phones
-    4. phone can not send a message if the battery life is less or equal to 2%
+    Main method to run the phone application and simulate calls/messages.
      */
     public static void main(String[] args) {
         LOGGER.trace("Starting simulation of the Phone app...");
