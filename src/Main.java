@@ -26,14 +26,14 @@ public class Main {
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465");
         Person person1 = new Person("Alice", "Smith", "245245", null, number1, null);
-        MobilePhone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
+        Phone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
         Number number2 = new Number("Verizon", "577", "4534563456");
         Person person2 = new Person("Bob", "Peterson", "2345677654", null, number2, null);
-        MobilePhone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
+        Phone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
         Number number3 = new Number("Beeline", "56", "8383388");
         Person person3 = new Person("Tom", "Black", "987654", null, number3, null);
         //MobilePhone phone3 = new MobilePhone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
-        StationaryPhone phone3 = new StationaryPhone();
+        Phone phone3 = new StationaryPhone();
         phone3.setOwnerPerson(person3);
         phone3.setPhoneNumber(number3);
 
@@ -88,12 +88,48 @@ public class Main {
         //phone3.setSoftware(soft3);
 
         // simulate call and message methods
-        phone1.startCall(phone2);
-        phone1.startCall(phone3);
-        phone3.startCall(phone1);
-        phone1.endCall();
-        phone3.startCall(phone2);
-        phone2.sendMessage(phone1, "Hi, will call after lecture.");
+        try {
+            phone1.startCall(phone2);
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (PhoneAlreadyOnCallException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            phone1.startCall(phone3);
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (PhoneAlreadyOnCallException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            phone3.startCall(phone1);
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (PhoneAlreadyOnCallException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            phone1.endCall();
+        } catch (CallNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            phone3.startCall(phone2);
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (PhoneAlreadyOnCallException e) {
+            LOGGER.error(e.getMessage());
+        }
+        try {
+            phone2.sendMessage(phone1, "Hi, will call after lecture.");
+        } catch (PhoneNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (BatteryNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (BatteryLowException e) {
+            LOGGER.error(e.getMessage());
+        }
         phone1.changeBattery("non-removable", "Samsung", 2000);
         try {
             phone2.charge(10);
@@ -104,6 +140,7 @@ public class Main {
         }
         phone3.reset();
        // phone3.update();
+
 
         LOGGER.trace("Ending simulation of the Phone app...");
     }
