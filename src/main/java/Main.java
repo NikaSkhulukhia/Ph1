@@ -1,4 +1,6 @@
 import exceptions.*;
+import operationalsystem.OS;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import person.Person;
@@ -7,7 +9,12 @@ import phone.Phone;
 import phone.StationaryPhone;
 import phonedata.Number;
 import phonehardware.Battery;
-import operationalsystem.OS;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 
 public class Main {
@@ -148,5 +155,20 @@ public class Main {
         phone3.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
         LOGGER.trace("END simulation of the Phone app...");
+
+
+        File fileToRead = new File("src/main/resources/fileToRead");
+        File fileToWrite = new File("src/main/resources/fileToWrite");
+        try {
+            String fileContent = FileUtils.readFileToString(fileToRead, "UTF-8").toLowerCase();
+            HashMap<String, Integer> wordsMap = new HashMap<>();
+            String[] words = fileContent.split(" ");
+            for (String word : words) {
+                Integer temp = (wordsMap.get(word) == null) ? wordsMap.put(word, 1) : wordsMap.put(word, wordsMap.get(word) + 1);
+            }
+            FileUtils.writeStringToFile(fileToWrite, wordsMap.toString(), "UTF-8");
+        } catch (IOException e) {
+            LOGGER.error("Problem with the file");
+        }
     }
 }
