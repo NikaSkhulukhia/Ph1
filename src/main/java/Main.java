@@ -150,30 +150,30 @@ public class Main {
         }
         phone3.reset();
         // phone3.update();
-        LOGGER.trace("get phone1 call log");
+        LOGGER.trace("Get phone1 call log");
         phone1.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                + c.getReceiverNumber().getFullNumber()));
-        LOGGER.trace("get phone2 call log");
+        LOGGER.trace("Get phone2 call log");
         phone2.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
-        LOGGER.trace("get phone3 call log");
+        LOGGER.trace("Get phone3 call log");
         phone3.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
         LOGGER.trace("END simulation of the Phone app...");
 
 
-        File fileToRead = new File("src/main/resources/fileToRead");
-        File fileToWrite = new File("src/main/resources/fileToWrite");
-        try {
-            String fileContent = FileUtils.readFileToString(fileToRead, "UTF-8").toLowerCase();
-            HashMap<String, Integer> wordsMap = new HashMap<>();
-            String[] words = fileContent.split(" ");
-            for (String word : words) {
-                Integer temp = (wordsMap.get(word) == null) ? wordsMap.put(word, 1) : wordsMap.put(word, wordsMap.get(word) + 1);
-            }
-            FileUtils.writeStringToFile(fileToWrite, wordsMap.toString(), "UTF-8");
-        } catch (IOException e) {
-            LOGGER.error("Problem with the file");
-        }
+//        File fileToRead = new File("src/main/resources/fileToRead");
+//        File fileToWrite = new File("src/main/resources/fileToWrite");
+//        try {
+//            String fileContent = FileUtils.readFileToString(fileToRead, "UTF-8").toLowerCase();
+//            HashMap<String, Integer> wordsMap = new HashMap<>();
+//            String[] words = fileContent.split(" ");
+//            for (String word : words) {
+//                Integer temp = (wordsMap.get(word) == null) ? wordsMap.put(word, 1) : wordsMap.put(word, wordsMap.get(word) + 1);
+//            }
+//            FileUtils.writeStringToFile(fileToWrite, wordsMap.toString(), "UTF-8");
+//        } catch (IOException e) {
+//            LOGGER.error("Problem with the file");
+//        }
     }
 }
