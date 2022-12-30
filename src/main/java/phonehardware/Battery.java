@@ -1,16 +1,17 @@
 package phonehardware;
 
+import enums.BatteryType;
 import exceptions.IncorrectBatteryLifeException;
 import exceptions.IncorrectCapacityException;
 
 import java.util.Objects;
 
 public class Battery extends PhoneParts{
-    private String type;
+    private BatteryType type;
     private int capacity; // greater than zero, default 1000
     private int life; // greater or equal to 0 AND less or equal to 100, default 100
 
-    public Battery(String brand, String type, int capacity, int life) throws IncorrectCapacityException, IncorrectBatteryLifeException {
+    public Battery(String brand, BatteryType type, int capacity, int life) throws IncorrectCapacityException, IncorrectBatteryLifeException {
         if (capacity <= 0) {
             throw new IncorrectCapacityException("capacity must be greater than zero!", "incorrect capacity");
         } else if (life < 0 || life > 100) {
@@ -35,9 +36,9 @@ public class Battery extends PhoneParts{
 
     @Override
     public String toString() {
-        String result = "This is " + type + " battery, with volume of "
+        String result = type.getDescription() + " battery, with volume of "
                 + capacity + " mAH, made by " + getBrand() + ".";
-        result += " Currently it is charged for " + life + "%.";
+        result += " Currently charged for " + life + "%.";
         return result;
     }
 
@@ -60,7 +61,7 @@ public class Battery extends PhoneParts{
     }
 
 
-    public String getType() {
+    public BatteryType getType() {
         return type;
     }
 
@@ -68,7 +69,7 @@ public class Battery extends PhoneParts{
         return capacity;
     }
 
-    public void setType(String type) {
+    public void setType(BatteryType type) {
         this.type = type;
     }
 

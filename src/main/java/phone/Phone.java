@@ -1,5 +1,6 @@
 package phone;
 
+import enums.BatteryType;
 import exceptions.*;
 import interfaces.*;
 import org.apache.logging.log4j.LogManager;
@@ -43,7 +44,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     }
 
     public abstract void charge(int time) throws IncorrectTimeException, BatteryNotFoundException;
-    public abstract void changeBattery(String type, String brand, int capacity);
+    public abstract void changeBattery(BatteryType type, String brand, int capacity);
     public abstract void reset();
 
     /*

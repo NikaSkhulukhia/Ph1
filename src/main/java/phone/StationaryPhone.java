@@ -1,5 +1,6 @@
 package phone;
 
+import enums.BatteryType;
 import exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -89,7 +90,7 @@ public class StationaryPhone extends Phone{
     }
 
     @Override
-    public void changeBattery(String type, String brand, int capacity) {
+    public void changeBattery(BatteryType type, String brand, int capacity) {
 
     }
 

@@ -1,3 +1,4 @@
+import enums.BatteryType;
 import enums.CountryCode;
 import exceptions.*;
 import operationalsystem.OS;
@@ -45,7 +46,7 @@ public class Main {
         Battery bat1;
         bat1 = null;
         try {
-            bat1 = new Battery("Samsung", "removable", 3000, 100);
+            bat1 = new Battery("Samsung", BatteryType.LIPO, 3000, 100);
         } catch (IncorrectCapacityException e) {
             LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
@@ -54,7 +55,7 @@ public class Main {
         Battery bat2;
         bat2 = null;
         try {
-            bat2 = new Battery("iPhone", "removable", 4000, 44);
+            bat2 = new Battery("iPhone", BatteryType.LIION, 4000, 44);
         } catch (IncorrectCapacityException e) {
             LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
@@ -63,7 +64,7 @@ public class Main {
         Battery bat3;
         bat3 = null;
         try {
-            bat3 = new Battery("Sony", "removable", 5000, 100);
+            bat3 = new Battery("Sony", BatteryType.NIMH, 5000, 100);
         } catch (IncorrectCapacityException e) {
             LOGGER.error(e.getMessage());
         } catch (IncorrectBatteryLifeException e) {
@@ -136,7 +137,10 @@ public class Main {
         } catch (BatteryLowException e) {
             LOGGER.error(e.getMessage());
         }
-        phone1.changeBattery("non-removable", "Samsung", 2000);
+        LOGGER.trace("Change battery for phone1.");
+        LOGGER.trace("phone1 old battery: " + phone1.getBattery().toString());
+        phone1.changeBattery(BatteryType.LIION, "Samsung", 2000);
+        LOGGER.trace("phone1 new battery: " + phone1.getBattery().toString());
         try {
             phone2.charge(10);
         } catch (IncorrectTimeException e) {
