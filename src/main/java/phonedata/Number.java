@@ -1,17 +1,22 @@
 package phonedata;
 
+import enums.CountryCode;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public final class Number {
     private static final String PRE_INDEX = "+"; // constant symbol '+'
+    private CountryCode countryCode;
     private String brand; // carrier name
     private String index; // carrier index number
     private String number; // owner personal phone number
 
-    public Number(String brand, String index, String number) {
+    public Number(String brand, String index, String number, CountryCode countryCode) {
         this.brand = brand;
         this.index = index;
         this.number = number;
+        this.countryCode = countryCode;
     }
 
     public Number() {
@@ -21,13 +26,16 @@ public final class Number {
     number is built by pre-index ("+"), index (numeric string like: "577"), number (numeric string like: 12344325)
      */
     public String getFullNumber(){
-        return PRE_INDEX + " " + index + " " + number;
-    }
+
+        return PRE_INDEX + StringUtils.SPACE + countryCode.getCode() + StringUtils.SPACE + getIndex()
+                + StringUtils.SPACE + getNumber();
+        }
 
     @Override
     public String toString() {
-        return "PhoneData.Number{" +
-                "brand='" + brand + '\'' +
+        return "Number{" +
+                "countryCode=" + countryCode +
+                ", brand='" + brand + '\'' +
                 ", index='" + index + '\'' +
                 ", number='" + number + '\'' +
                 '}';
@@ -69,5 +77,13 @@ public final class Number {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public CountryCode getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(CountryCode countryCode) {
+        this.countryCode = countryCode;
     }
 }
