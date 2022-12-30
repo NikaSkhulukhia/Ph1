@@ -1,5 +1,6 @@
 package operationalsystem;
 
+import enums.OSType;
 import exceptions.IncorrectOSVersionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,10 +9,10 @@ import java.util.Objects;
 
 public class OS {
     private static final Logger LOGGER = LogManager.getLogger();
-    private String type;
+    private OSType type;
     private int version; // greater or equal to zero, default 0;
 
-    public OS(String type, int version) throws IncorrectOSVersionException {
+    public OS(OSType type, int version) throws IncorrectOSVersionException {
         if (version < 0) {
             LOGGER.debug("OS version" + version);
             throw new IncorrectOSVersionException("OS version must be greater or equal to zero!", "OS version not correct");
@@ -56,11 +57,11 @@ public class OS {
         return Objects.hash(type, version);
     }
 
-    public String getType() {
+    public OSType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(OSType type) {
         this.type = type;
     }
 

@@ -1,5 +1,6 @@
 import enums.BatteryType;
 import enums.CountryCode;
+import enums.OSType;
 import exceptions.*;
 import operationalsystem.OS;
 import org.apache.commons.io.FileUtils;
@@ -76,17 +77,17 @@ public class Main {
 
         // create OS
         try {
-            OS soft1 = new OS("android", 11);
+            OS soft1 = new OS(OSType.ANDROID, 11);
         } catch (IncorrectOSVersionException e) {
             LOGGER.error(e.getMessage());
         }
         try {
-            OS soft2 = new OS("iOS", 14);
+            OS soft2 = new OS(OSType.IOS, 14);
         } catch (IncorrectOSVersionException e) {
             LOGGER.error(e.getMessage());
         }
         try {
-            OS soft3 = new OS("android", 12);
+            OS soft3 = new OS(OSType.WINDOWS, 12);
         } catch (IncorrectOSVersionException e) {
             LOGGER.error(e.getMessage());
         }
@@ -159,7 +160,7 @@ public class Main {
         LOGGER.trace("Get phone3 call log");
         phone3.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
-        LOGGER.trace("END simulation of the Phone app...");
+        LOGGER.trace("END simulation of the Phone app....");
 
 
 //        File fileToRead = new File("src/main/resources/fileToRead");
