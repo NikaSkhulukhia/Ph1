@@ -79,7 +79,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     /*
     end call for both phones
     save currentCall object inside callLog list for both phones
-    after the call battery life is decreased by 1 for both involved phones
+    after the call battery life is decreased by 1-4 for both involved phones, depending on battery type
      */
     public void endCall() throws CallNotFoundException {
         if (!isOnCall() || getCurrentCall() == null) {
@@ -94,7 +94,21 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
             receiverPhone.callLog.add(receiverPhone.getCurrentCall());
             receiverPhone.setCurrentCall(null);
             receiverPhone.setOnCall(false);
-            int receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 1;
+            int receiverBatteryNewLife = receiverPhone.getBattery().getLife();
+            switch (receiverPhone.getBattery().getType()) {
+                case NICD -> {
+                    receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 4;
+                }
+                case NIMH -> {
+                    receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 3;
+                }
+                case LIION -> {
+                    receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 2;
+                }
+                case LIPO -> {
+                    receiverBatteryNewLife = receiverPhone.getBattery().getLife() - 1;
+                }
+            }
             try {
                 receiverPhone.getBattery().setLife(receiverBatteryNewLife);
             } catch (IncorrectBatteryLifeException e) {

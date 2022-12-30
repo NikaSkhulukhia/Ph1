@@ -1,5 +1,6 @@
 package phonehardware;
 
+import enums.FlashStorageType;
 import exceptions.IncorrectCapacityException;
 import exceptions.IncorrectHardwareVolumeException;
 
@@ -9,8 +10,10 @@ public class Memory extends PhoneParts{
     private int capacity; // PhoneParts.Memory total volume, must be greater than zero. default 4
     private int volumeUsed; // greater or equal to zero. default 0
     private int volumeFree; // greater or equal to zero. default same as capacity
+    private FlashStorageType type;
 
-    public Memory(String brand, int capacity, int volumeUsed) throws IncorrectCapacityException, IncorrectHardwareVolumeException {
+    public Memory(String brand, int capacity, int volumeUsed, FlashStorageType type)
+            throws IncorrectCapacityException, IncorrectHardwareVolumeException {
         if (capacity == 0)
             throw new IncorrectCapacityException("capacity must be greater than zero!", "incorrect capacity");
         else if (volumeUsed < 0){
@@ -22,6 +25,7 @@ public class Memory extends PhoneParts{
             this.capacity = capacity;
             this.volumeUsed = volumeUsed;
             this.volumeFree = this.capacity - this.volumeUsed;
+            this.type = type;
         }
     }
 
@@ -100,5 +104,13 @@ public class Memory extends PhoneParts{
 
     public int getVolumeFree() {
         return volumeFree;
+    }
+
+    public FlashStorageType getType() {
+        return type;
+    }
+
+    public void setType(FlashStorageType type) {
+        this.type = type;
     }
 }

@@ -1,13 +1,15 @@
 package phonehardware;
 
+import enums.DisplayType;
+
 import java.util.Objects;
 
 public class Display extends PhoneParts {
-    private String type;
+    private DisplayType type;
     private String resolution;
     private double size;
 
-    public Display(String brand, String type, String resolution, double size) {
+    public Display(String brand, DisplayType type, String resolution, double size) {
             setBrand(brand);
             this.type = type;
             this.resolution = resolution;
@@ -26,7 +28,7 @@ public class Display extends PhoneParts {
     public String toString() {
         return "PhoneParts.Display{" +
                 "brand='" + getBrand() + '\'' +
-                ", type='" + type + '\'' +
+                ", type='" + type.getLongName() + '\'' +
                 ", resolution='" + resolution + '\'' +
                 ", size=" + size +
                 '}';
@@ -50,11 +52,11 @@ public class Display extends PhoneParts {
         return Objects.hash(type, resolution, size, getSerialNumber(), getBrand());
     }
 
-    public String getType() {
+    public DisplayType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DisplayType type) {
         this.type = type;
     }
 
