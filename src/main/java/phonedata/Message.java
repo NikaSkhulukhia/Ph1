@@ -3,7 +3,7 @@ package phonedata;
 import person.Person;
 import phone.Phone;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public final class Message {
@@ -13,7 +13,7 @@ public final class Message {
     private Person messageReceiverPerson;
     private Phone messageSenderPhone;
     private Phone messageReceiverPhone;
-    private Date messageSendDate;
+    private LocalDate messageSendDate;
     private String messageText;
 
     public Message(Number messageSenderNumber, Number messageReceiverNumber, Phone messageSenderPhone, Phone messageReceiverPhone) {
@@ -110,11 +110,11 @@ public final class Message {
         this.messageReceiverPhone = messageReceiverPhone;
     }
 
-    public Date getMessageSendDate() {
+    public LocalDate getMessageSendDate() {
         return messageSendDate;
     }
 
-    public void setMessageSendDate(Date messageSendDate) {
+    public void setMessageSendDate(LocalDate messageSendDate) {
         this.messageSendDate = messageSendDate;
     }
 

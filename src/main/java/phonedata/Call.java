@@ -3,7 +3,7 @@ package phonedata;
 import person.Person;
 import phone.Phone;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public final class Call {
@@ -13,8 +13,8 @@ public final class Call {
      private Person receiverPerson;
      private Phone callerPhone;
      private Phone receiverPhone;
-     private Date callStartDate;
-     private Date callEndDate;
+     private LocalDate callStartDate;
+     private LocalDate callEndDate;
 
     public Call(Number callerNumber, Number receiverNumber, Phone callerPhone, Phone receiverPhone) {
         this.callerNumber = callerNumber;
@@ -104,19 +104,19 @@ public final class Call {
         this.receiverPhone = receiverPhone;
     }
 
-    public Date getCallStartDate() {
+    public LocalDate getCallStartDate() {
         return callStartDate;
     }
 
-    public void setCallStartDate(Date callStartDate) {
+    public void setCallStartDate(LocalDate callStartDate) {
         this.callStartDate = callStartDate;
     }
 
-    public Date getCallEndDate() {
+    public LocalDate getCallEndDate() {
         return callEndDate;
     }
 
-    public void setCallEndDate(Date callEndDate) {
+    public void setCallEndDate(LocalDate callEndDate) {
         this.callEndDate = callEndDate;
     }
 }

@@ -12,6 +12,7 @@ import phonehardware.Display;
 import operationalsystem.OS;
 import phonedata.Number;
 import java.util.Objects;
+import java.util.function.BinaryOperator;
 
 public class MobilePhone extends Phone implements IUpdate {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -95,13 +96,14 @@ public class MobilePhone extends Phone implements IUpdate {
     // battery life increases by 1 for each minute(time)
     @Override
     public void charge(int time) throws IncorrectTimeException, BatteryNotFoundException {
+        BinaryOperator<Integer> addInts = (x, y) -> x + y;
         if (time < 0) {
             throw new IncorrectTimeException("Time must be greater than zero!", "negative time");
         } else if (getBattery() == null) {
             throw new BatteryNotFoundException("No battery installed! Please insert the battery!", "battery is null");
         } else {
             int batteryCurrentLife = getBattery().getLife();
-            int batteryNewLife = batteryCurrentLife + time;
+            int batteryNewLife = addInts.apply(batteryCurrentLife, time);//batteryCurrentLife + time;
             if (batteryNewLife > 100)
                 batteryNewLife = 100;
             try {

@@ -9,12 +9,15 @@ import phonehardware.*;
 import operationalsystem.OS;
 
 import java.util.Objects;
+import java.util.function.BinaryOperator;
 
 public class SatellitePhone extends Phone implements IUpdate {
     private static final Logger LOGGER = LogManager.getLogger();
     private String nearestSatelliteSerialNumber;
     private Keyboard keyboard;
     private OS OS;
+    BinaryOperator<String> concatStrings = (s1, s2) -> s1 + " " + s2;
+
 
     public SatellitePhone(String nearestSatelliteSerialNumber, Keyboard keyboard) {
         this.nearestSatelliteSerialNumber = nearestSatelliteSerialNumber;
@@ -28,7 +31,7 @@ public class SatellitePhone extends Phone implements IUpdate {
     public void startCall(Phone receiverPhone) {
         try {
             super.startCall(receiverPhone);
-            String phTempName = getBrand() + "-" + getSerialNumber();
+            String phTempName = concatStrings.apply(getBrand(), getSerialNumber());
             LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call started");
             LOGGER.trace("<" + phTempName + ">: " + "PhoneData.Call start date: "
                     + getCurrentCall().getCallStartDate().toString());
@@ -51,7 +54,7 @@ public class SatellitePhone extends Phone implements IUpdate {
     public void endCall() {
         try {
             super.endCall();
-            String phTempName = getBrand() + "-" + getSerialNumber();
+            String phTempName = concatStrings.apply(getBrand(), getSerialNumber());
             LOGGER.trace("<" + phTempName + ">: " + "Call Ended");
             LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallStartDate().toString());
             LOGGER.trace("<" + phTempName + ">: " + "Call start date: " + getLastCall().getCallEndDate().toString());
@@ -68,7 +71,7 @@ public class SatellitePhone extends Phone implements IUpdate {
     public void sendMessage(Phone receiverPhone, String messageText) {
         try {
             super.sendMessage(receiverPhone, messageText);
-            String phTempName = getBrand() + "-" + getSerialNumber();
+            String phTempName = concatStrings.apply(getBrand(), getSerialNumber());
             LOGGER.trace("<" + phTempName + ">: " + "Message sent");
             LOGGER.trace("<" + phTempName + ">: " + "Message send date: " + getLastMessageSent().getMessageSendDate().toString());
             LOGGER.trace("<" + phTempName + ">: " + "Sender number: " + getLastMessageSent().getMessageSenderNumber().getFullNumber());
@@ -104,7 +107,7 @@ public class SatellitePhone extends Phone implements IUpdate {
 
     @Override
     public void update() throws OSNotFoundException {
-        String phTempName = getBrand() + "-" + getSerialNumber();
+        String phTempName = concatStrings.apply(getBrand(), getSerialNumber());
         if (OS == null) {
             throw new OSNotFoundException("Update not successful, no OS installed", "OS is null");
         } else {

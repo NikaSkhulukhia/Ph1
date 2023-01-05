@@ -15,6 +15,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Supplier;
 
 public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -39,6 +40,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
     private Memory memory;
     private List<Call> callLog = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
+    Supplier<LocalDate> currentDateSupplier = () -> LocalDate.now();
 
     public Phone() {
     }
@@ -60,7 +62,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
             } else if (receiverPhone.isOnCall() || receiverPhone.getCurrentCall() != null) {
                 throw new PhoneAlreadyOnCallException("Can not start the call, receiver phone already in another call!", "phone already on call");
             } else {
-                Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                LocalDate currentDate = currentDateSupplier.get();
                 Call currentCall = new Call();
                 currentCall.setCallStartDate(currentDate);
                 currentCall.setCallerNumber(getPhoneNumber());
@@ -85,7 +87,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
         if (!isOnCall() || getCurrentCall() == null) {
             throw new CallNotFoundException("No current call to end!", "call not found");
         } else {
-            Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            LocalDate currentDate = currentDateSupplier.get();
 
             // end call for receiver
             Phone receiverPhone = getCurrentCall().getReceiverPhone();
@@ -142,7 +144,7 @@ public abstract class Phone implements ICall, IMessage, ICharge, IReset {
             throw new BatteryLowException("Can not send the message, charge phone", "battery low");
         }
         else {
-            Date currentDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            LocalDate currentDate = currentDateSupplier.get();
             Message message = new Message();
             message.setMessageSendDate(currentDate);
             message.setMessageText(messageText);
