@@ -13,16 +13,18 @@ import person.Person;
 import phone.MobilePhone;
 import phone.Phone;
 import phone.StationaryPhone;
+import phonedata.Call;
+import phonedata.Message;
 import phonedata.Number;
 import phonehardware.Battery;
 import phonehardware.Processor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -207,6 +209,57 @@ public class Main {
             }
         }
 
+        // examine call logs for phone1 using streams
+        // To find the longest call in the call log
+        Call longestCall = phone1.getCallLog().stream()
+                .max(Comparator.comparing(Call::getCallDuration))
+                .orElse(null);
+        LOGGER.trace("longest call is: " + longestCall.toString());
+
+        // To find the phone owner with the most number of calls in the call log:
+        Person ownerWithMostCalls = phone1.getCallLog().stream()
+                .collect(Collectors.groupingBy(Call::getCallerPerson, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+        LOGGER.trace("owner of most calls is: " + ownerWithMostCalls.getFirstName() + " " + ownerWithMostCalls.getLastName());
+
+        // To find the total duration of all calls in the call log
+        long totalCallDuration = phone1.getCallLog().stream()
+                .mapToLong(Call::getCallDuration)
+                .sum();
+        LOGGER.trace("total call duration is: " + totalCallDuration);
+
+        // To filter the call log to only include calls made to a specific phone number
+        Number targetNumber = new Number("AT&T", "1", "054565465", CountryCode.CANADA);
+        List<Call> callsToNumber = phone1.getCallLog().stream()
+                .filter(c -> c.getReceiverNumber().equals(targetNumber))
+                .collect(Collectors.toList());
+
+        // Get the total number of calls made
+        long totalCalls = phone1.getCallLog().stream().count();
+
+        // examine messages log for phone 1
+        // use the stream method 'filter' to filter the list of messages based on certain criteria,
+        LocalDate startDate = LocalDate.of(2022, 1, 1);
+        LocalDate endDate = LocalDate.of(2022, 12, 31);
+        List<Message> messagesWithinDateRange = phone1.getMessages().stream()
+                .filter(message -> message.getMessageSendDate().isAfter(startDate) && message.getMessageSendDate()
+                        .isBefore(endDate))
+                .collect(Collectors.toList());
+
+        // use the stream method 'map', to get a list of just the message texts
+        List<String> messageBodies = phone1.getMessages().stream()
+                .map(Message::getMessageText)
+                .collect(Collectors.toList());
+
+        // use the stream method 'sorted' to sort the list of messages based on a certain field.
+        List<Message> sortedMessages = phone1.getMessages().stream()
+                .sorted(Comparator.comparing(Message::getMessageSendDate))
+                .collect(Collectors.toList());
+
 
 
         // END SIMULATION
@@ -217,11 +270,8 @@ public class Main {
 //        File fileToWrite = new File("src/main/resources/fileToWrite");
 //        try {
 //            String fileContent = FileUtils.readFileToString(fileToRead, "UTF-8").toLowerCase();
-//            HashMap<String, Integer> wordsMap = new HashMap<>();
-//            String[] words = fileContent.split(" ");
-//            for (String word : words) {
-//                Integer temp = (wordsMap.get(word) == null) ? wordsMap.put(word, 1) : wordsMap.put(word, wordsMap.get(word) + 1);
-//            }
+//            Map<Object, Integer> wordsMap = Arrays.stream(fileContent.split(" "))
+//                    .collect(Collectors.toMap(w -> w, w -> 1, Integer::sum));
 //            FileUtils.writeStringToFile(fileToWrite, wordsMap.toString(), "UTF-8");
 //        } catch (IOException e) {
 //            LOGGER.error("Problem with the file");

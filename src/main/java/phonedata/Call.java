@@ -26,6 +26,14 @@ public final class Call {
     public Call() {
     }
 
+    public long getCallDuration() {
+        if (this.callEndDate == null || this.callStartDate == null) {
+            return 0;
+        } else {
+            return java.time.Duration.between(this.callStartDate.atStartOfDay(), this.callEndDate.atStartOfDay()).toMinutes();
+        }
+    }
+
     @Override
     public String toString() {
         return "PhoneData.Call{" +
