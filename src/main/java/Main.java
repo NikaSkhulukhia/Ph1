@@ -12,19 +12,18 @@ import org.apache.logging.log4j.Logger;
 import person.Person;
 import phone.MobilePhone;
 import phone.Phone;
+import phone.SatellitePhone;
 import phone.StationaryPhone;
 import phonedata.Call;
 import phonedata.Message;
 import phonedata.Number;
 import phonehardware.Battery;
+import phonehardware.Keyboard;
 import phonehardware.Processor;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
@@ -318,6 +317,26 @@ public class Main {
         Method[] methods = cls.getDeclaredMethods();
         for (Method method : methods) {
             LOGGER.trace(method.getName());
+        }
+
+        // Create object and call method using the only reflection
+        LOGGER.trace("Create object and call method using the only reflection");
+        Class satellitePhoneClass = SatellitePhone.class;
+        Constructor constructor = null;
+        try {
+            constructor = satellitePhoneClass.getConstructor(String.class, Keyboard.class);
+            SatellitePhone satellitePhone = (SatellitePhone) constructor.newInstance("123456", new Keyboard());
+            Method startCallMethod = satellitePhoneClass.getMethod("startCall", Phone.class);
+            Phone receiverPhone = phone3;
+            startCallMethod.invoke(satellitePhone, receiverPhone);
+        } catch (NoSuchMethodException e) {
+            LOGGER.error("NoSuchMethodException " + e.getMessage());
+        } catch (InvocationTargetException e) {
+            LOGGER.error("InvocationTargetException " + e.getMessage());
+        } catch (InstantiationException e) {
+            LOGGER.error("InstantiationException " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            LOGGER.error("IllegalAccessException " + e.getMessage());
         }
     }
 }
