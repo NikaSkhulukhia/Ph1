@@ -21,6 +21,10 @@ import phonehardware.Processor;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
@@ -265,7 +269,7 @@ public class Main {
         // END SIMULATION
         LOGGER.trace("END simulation of the Phone app....");
 
-
+        // COUNT WORDS FROM FILE TASK
 //        File fileToRead = new File("src/main/resources/fileToRead");
 //        File fileToWrite = new File("src/main/resources/fileToWrite");
 //        try {
@@ -276,5 +280,44 @@ public class Main {
 //        } catch (IOException e) {
 //            LOGGER.error("Problem with the file");
 //        }
+
+        //REFLECTION
+        Class<?> cls = Call.class;
+
+        // Get the fields
+        LOGGER.trace("get fields for class Call using reflection");
+        Field[] fields = cls.getDeclaredFields();
+        for (Field field : fields) {
+            int modifiers = field.getModifiers();
+            String modifierString = Modifier.toString(modifiers);
+            Class<?> fieldType = field.getType();
+            LOGGER.trace(modifierString + " " + fieldType.getName() + " " + field.getName());
+        }
+
+        // Get the constructors
+        LOGGER.trace("get constructors for class Call using reflection");
+        Constructor<?>[] constructors = cls.getDeclaredConstructors();
+        for (Constructor<?> constructor : constructors) {
+            int modifiers = constructor.getModifiers();
+            String modifierString = Modifier.toString(modifiers);
+            Class<?>[] parameterTypes = constructor.getParameterTypes();
+            String constr = "";
+            constr += (modifierString + " " + cls.getSimpleName() + "(");
+            for (int i = 0; i < parameterTypes.length; i++) {
+                constr += (parameterTypes[i].getName());
+                if (i < parameterTypes.length - 1) {
+                    constr += (", ");
+                }
+            }
+            constr += ")";
+            LOGGER.trace(constr);
+        }
+
+        // Get the methods
+        LOGGER.trace("get methods for class Call using reflection");
+        Method[] methods = cls.getDeclaredMethods();
+        for (Method method : methods) {
+            LOGGER.trace(method.getName());
+        }
     }
 }
