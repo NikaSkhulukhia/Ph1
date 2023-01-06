@@ -2,6 +2,9 @@ import enums.BatteryType;
 import enums.CountryCode;
 import enums.OSType;
 import exceptions.*;
+import interfaces.IPhoneAction;
+import interfaces.IPhoneBiFunction;
+import interfaces.IPhoneBiPredicate;
 import operationalsystem.OS;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,12 +15,14 @@ import phone.Phone;
 import phone.StationaryPhone;
 import phonedata.Number;
 import phonehardware.Battery;
+import phonehardware.Processor;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.function.Predicate;
 
 
 public class Main {
@@ -26,22 +31,36 @@ public class Main {
     Main method to run the phone application and simulate calls/messages.
      */
     public static void main(String[] args) {
+        // lambda function to end the current call
+        IPhoneAction endCallAction = Phone::endCall;
+        // lambda function to get total weight of 2 phones
+        IPhoneBiFunction<Double, Double, Double> totalWeightFunction = (p1, p2, weight1, weight2)
+                -> p1.getWeight() + weight1 + p2.getWeight() + weight2;
+        /*
+         compare the battery life of two phones: The batteryLifeComparisonFunction lambda expression takes
+         two phone objects and two battery life thresholds as inputs,
+         and returns true if both phones have a battery life greater than the corresponding threshold,
+         and false otherwise.
+         */
+        IPhoneBiPredicate<Integer, Integer> batteryLifeComparisonFunction = (p1, p2, minLife1, minLife2)
+                -> p1.getBattery().getLife() > minLife1 && p2.getBattery().getLife() > minLife2;
+
+        // START SIMULATION
         LOGGER.trace("START simulation of the Phone app...");
 
         // initialize numbers, phones and owners
         Number number1 = new Number("AT&T", "1", "054565465", CountryCode.CANADA);
         Person person1 = new Person("Alice", "Smith", "245245", null, number1, null);
-        Phone phone1 = new MobilePhone("Alice's S22","Samsung", "03r303f", number1, person1);
+        Phone phone1 = new MobilePhone("Alice's S22", "Samsung", "03r303f", number1, person1);
         Number number2 = new Number("Verizon", "577", "4534563456", CountryCode.EGYPT);
         Person person2 = new Person("Bob", "Peterson", "2345677654", null, number2, null);
-        Phone phone2 = new MobilePhone("Bob's iPhone","iPhone", "86h68h6", number2, person2);
+        Phone phone2 = new MobilePhone("Bob's iPhone", "iPhone", "86h68h6", number2, person2);
         Number number3 = new Number("Beeline", "56", "8383388", CountryCode.GEORGIA);
         Person person3 = new Person("Tom", "Black", "987654", null, number3, null);
         //MobilePhone phone3 = new MobilePhone("Tom's Sony 11","Sony", "1kn31n", number3, person3);
         Phone phone3 = new StationaryPhone();
         phone3.setOwnerPerson(person3);
         phone3.setPhoneNumber(number3);
-
 
         // create essential hardware for phones
         Battery bat1;
@@ -118,7 +137,8 @@ public class Main {
             LOGGER.error(e.getMessage());
         }
         try {
-            phone1.endCall();
+            endCallAction.performAction(phone1);
+            // phone1.endCall();
         } catch (CallNotFoundException e) {
             LOGGER.error(e.getMessage());
         }
@@ -153,13 +173,43 @@ public class Main {
         // phone3.update();
         LOGGER.trace("Get phone1 call log");
         phone1.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
-               + c.getReceiverNumber().getFullNumber()));
+                + c.getReceiverNumber().getFullNumber()));
         LOGGER.trace("Get phone2 call log");
         phone2.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
         LOGGER.trace("Get phone3 call log");
         phone3.getCallLog().forEach(c -> LOGGER.trace(c.getCallerNumber().getFullNumber() + " TO "
                 + c.getReceiverNumber().getFullNumber()));
+
+        // get total weight of phone 1 and phone2
+        phone1.setWeight(111);
+        phone2.setWeight(105);
+        double additionalWeight1 = 0.5; // assume this is the weight of a phone case
+        double additionalWeight2 = 0.3; // assume this is the weight of a phone case
+        double totalWeight = totalWeightFunction.apply(phone1, phone2, additionalWeight1, additionalWeight2);
+        LOGGER.trace("Total weight of phones: " + totalWeight + " g");
+
+        // check battery lives of 2 phones to make a call
+        int batteryLifeThreshold1 = 1;
+        int batteryLifeThreshold2 = 1;
+
+        boolean bothPhonesHaveSufficientBatteryLife = batteryLifeComparisonFunction.test(phone1, phone2,
+                batteryLifeThreshold1, batteryLifeThreshold2);
+
+        if (bothPhonesHaveSufficientBatteryLife) {
+            LOGGER.trace("Both phones have sufficient battery life.");
+            try {
+                phone2.startCall(phone1);
+            } catch (PhoneNotFoundException e) {
+                LOGGER.error(e.getMessage());
+            } catch (PhoneAlreadyOnCallException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+
+
+
+        // END SIMULATION
         LOGGER.trace("END simulation of the Phone app....");
 
 

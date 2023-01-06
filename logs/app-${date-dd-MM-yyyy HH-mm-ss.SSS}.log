@@ -88,3 +88,147 @@
 2023-01-06 02:06:37,843 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
 2023-01-06 02:06:37,844 TRACE Main [main] Get phone3 call log
 2023-01-06 02:06:37,845 TRACE Main [main] END simulation of the Phone app....
+2023-01-06 11:59:33,884 TRACE Main [main] START simulation of the Phone app...
+2023-01-06 11:59:33,915 TRACE p.MobilePhone [main] <Alice's S22>: Call started
+2023-01-06 11:59:33,916 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 11:59:33,924 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 11:59:33,925 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 11:59:33,926 ERROR p.MobilePhone [main] Can not start the call, caller phone already in another call!
+2023-01-06 11:59:33,927 DEBUG p.MobilePhone [main] isOnCall: true
+2023-01-06 11:59:33,964 DEBUG p.MobilePhone [main] currentCall: PhoneData.Call{callerNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, receiverNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, callerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, receiverPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, callerPhone=Phone.MobilePhone{name='Alice's S22', brand='Samsung', serialNumber='03r303f', phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, ownerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, battery=Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 100%.}, receiverPhone=Phone.MobilePhone{name='Bob's iPhone', brand='iPhone', serialNumber='86h68h6', phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, ownerPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, battery=Lithium Ion battery, with volume of 4000 mAH, made by iPhone. Currently charged for 44%.}}
+2023-01-06 11:59:33,965 DEBUG p.MobilePhone [main] receiver isOnCall: false
+2023-01-06 11:59:33,966 DEBUG p.MobilePhone [main] receiver currentCall: null
+2023-01-06 11:59:33,966 ERROR p.StationaryPhone [main] Can not start the call, receiver phone already in another call!
+2023-01-06 11:59:33,967 DEBUG p.StationaryPhone [main] isOnCall: false
+2023-01-06 11:59:33,968 DEBUG p.StationaryPhone [main] currentCall: null
+2023-01-06 11:59:33,970 TRACE p.MobilePhone [main] <Alice's S22>: Call Ended
+2023-01-06 11:59:33,971 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 11:59:33,971 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 11:59:33,972 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 11:59:33,973 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 11:59:33,975 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call started
+2023-01-06 11:59:33,975 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call start date: 2023-01-06
+2023-01-06 11:59:33,976 TRACE p.StationaryPhone [main] <null-ST-null>: Caller number: + 995 56 8383388
+2023-01-06 11:59:33,977 TRACE p.StationaryPhone [main] <null-ST-null>: Receiver number: + 20 577 4534563456
+2023-01-06 11:59:33,977 TRACE p.StationaryPhone [main] <null-ST-null>: . . . 
+2023-01-06 11:59:33,982 TRACE p.MobilePhone [main] <Bob's iPhone>: Message sent
+2023-01-06 11:59:33,983 TRACE p.MobilePhone [main] <Bob's iPhone>: Message send date: 2023-01-06
+2023-01-06 11:59:33,983 TRACE p.MobilePhone [main] <Bob's iPhone>: Sender number: + 20 577 4534563456
+2023-01-06 11:59:33,984 TRACE p.MobilePhone [main] <Bob's iPhone>: Receiver number: + 1 1 054565465
+2023-01-06 11:59:33,985 TRACE p.MobilePhone [main] <Bob's iPhone>: Message text: Hi, will call after lecture.
+2023-01-06 11:59:33,985 TRACE Main [main] Change battery for phone1.
+2023-01-06 11:59:33,986 TRACE Main [main] phone1 old battery: Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 99%.
+2023-01-06 11:59:33,987 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery change successful
+2023-01-06 11:59:33,991 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery type: LIION
+2023-01-06 11:59:33,992 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery brand: Samsung
+2023-01-06 11:59:33,993 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery capacity: 2000
+2023-01-06 11:59:33,995 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery current life: 100
+2023-01-06 11:59:33,996 TRACE Main [main] phone1 new battery: Lithium Ion battery, with volume of 2000 mAH, made by Samsung. Currently charged for 100%.
+2023-01-06 11:59:34,000 TRACE p.MobilePhone [main] <Bob's iPhone>: Phone.Phone charged
+2023-01-06 11:59:34,002 TRACE p.MobilePhone [main] <Bob's iPhone>: Charging time: 10
+2023-01-06 11:59:34,003 TRACE p.MobilePhone [main] <Bob's iPhone>: Battery current life: 52
+2023-01-06 11:59:34,004 TRACE Main [main] Get phone1 call log
+2023-01-06 11:59:34,006 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 11:59:34,007 TRACE Main [main] Get phone2 call log
+2023-01-06 11:59:34,010 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 11:59:34,010 TRACE Main [main] Get phone3 call log
+2023-01-06 11:59:34,014 TRACE Main [main] Total weight of phones: 0.8 g
+2023-01-06 11:59:34,017 TRACE Main [main] END simulation of the Phone app....
+2023-01-06 12:01:02,065 TRACE Main [main] START simulation of the Phone app...
+2023-01-06 12:01:02,094 TRACE p.MobilePhone [main] <Alice's S22>: Call started
+2023-01-06 12:01:02,094 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:01:02,103 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 12:01:02,104 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 12:01:02,105 ERROR p.MobilePhone [main] Can not start the call, caller phone already in another call!
+2023-01-06 12:01:02,106 DEBUG p.MobilePhone [main] isOnCall: true
+2023-01-06 12:01:02,143 DEBUG p.MobilePhone [main] currentCall: PhoneData.Call{callerNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, receiverNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, callerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, receiverPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, callerPhone=Phone.MobilePhone{name='Alice's S22', brand='Samsung', serialNumber='03r303f', phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, ownerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, battery=Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 100%.}, receiverPhone=Phone.MobilePhone{name='Bob's iPhone', brand='iPhone', serialNumber='86h68h6', phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, ownerPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, battery=Lithium Ion battery, with volume of 4000 mAH, made by iPhone. Currently charged for 44%.}}
+2023-01-06 12:01:02,145 DEBUG p.MobilePhone [main] receiver isOnCall: false
+2023-01-06 12:01:02,145 DEBUG p.MobilePhone [main] receiver currentCall: null
+2023-01-06 12:01:02,146 ERROR p.StationaryPhone [main] Can not start the call, receiver phone already in another call!
+2023-01-06 12:01:02,146 DEBUG p.StationaryPhone [main] isOnCall: false
+2023-01-06 12:01:02,147 DEBUG p.StationaryPhone [main] currentCall: null
+2023-01-06 12:01:02,149 TRACE p.MobilePhone [main] <Alice's S22>: Call Ended
+2023-01-06 12:01:02,150 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:01:02,151 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:01:02,152 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 12:01:02,153 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 12:01:02,154 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call started
+2023-01-06 12:01:02,154 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call start date: 2023-01-06
+2023-01-06 12:01:02,155 TRACE p.StationaryPhone [main] <null-ST-null>: Caller number: + 995 56 8383388
+2023-01-06 12:01:02,156 TRACE p.StationaryPhone [main] <null-ST-null>: Receiver number: + 20 577 4534563456
+2023-01-06 12:01:02,157 TRACE p.StationaryPhone [main] <null-ST-null>: . . . 
+2023-01-06 12:01:02,159 TRACE p.MobilePhone [main] <Bob's iPhone>: Message sent
+2023-01-06 12:01:02,160 TRACE p.MobilePhone [main] <Bob's iPhone>: Message send date: 2023-01-06
+2023-01-06 12:01:02,161 TRACE p.MobilePhone [main] <Bob's iPhone>: Sender number: + 20 577 4534563456
+2023-01-06 12:01:02,161 TRACE p.MobilePhone [main] <Bob's iPhone>: Receiver number: + 1 1 054565465
+2023-01-06 12:01:02,162 TRACE p.MobilePhone [main] <Bob's iPhone>: Message text: Hi, will call after lecture.
+2023-01-06 12:01:02,163 TRACE Main [main] Change battery for phone1.
+2023-01-06 12:01:02,164 TRACE Main [main] phone1 old battery: Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 99%.
+2023-01-06 12:01:02,165 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery change successful
+2023-01-06 12:01:02,166 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery type: LIION
+2023-01-06 12:01:02,167 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery brand: Samsung
+2023-01-06 12:01:02,167 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery capacity: 2000
+2023-01-06 12:01:02,168 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery current life: 100
+2023-01-06 12:01:02,169 TRACE Main [main] phone1 new battery: Lithium Ion battery, with volume of 2000 mAH, made by Samsung. Currently charged for 100%.
+2023-01-06 12:01:02,171 TRACE p.MobilePhone [main] <Bob's iPhone>: Phone.Phone charged
+2023-01-06 12:01:02,172 TRACE p.MobilePhone [main] <Bob's iPhone>: Charging time: 10
+2023-01-06 12:01:02,173 TRACE p.MobilePhone [main] <Bob's iPhone>: Battery current life: 52
+2023-01-06 12:01:02,173 TRACE Main [main] Get phone1 call log
+2023-01-06 12:01:02,174 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 12:01:02,175 TRACE Main [main] Get phone2 call log
+2023-01-06 12:01:02,176 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 12:01:02,177 TRACE Main [main] Get phone3 call log
+2023-01-06 12:01:02,182 TRACE Main [main] Total weight of phones: 216.8 g
+2023-01-06 12:01:02,184 TRACE Main [main] END simulation of the Phone app....
+2023-01-06 12:16:45,303 TRACE Main [main] START simulation of the Phone app...
+2023-01-06 12:16:45,322 TRACE p.MobilePhone [main] <Alice's S22>: Call started
+2023-01-06 12:16:45,323 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:16:45,330 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 12:16:45,331 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 12:16:45,331 ERROR p.MobilePhone [main] Can not start the call, caller phone already in another call!
+2023-01-06 12:16:45,332 DEBUG p.MobilePhone [main] isOnCall: true
+2023-01-06 12:16:45,398 DEBUG p.MobilePhone [main] currentCall: PhoneData.Call{callerNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, receiverNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, callerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, receiverPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, callerPhone=Phone.MobilePhone{name='Alice's S22', brand='Samsung', serialNumber='03r303f', phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}, ownerPerson=Person.Person{firstName='Alice', lastName='Smith', idNumber='245245', birthDate=null, phoneNumber=Number{countryCode=CANADA, brand='AT&T', index='1', number='054565465'}}, battery=Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 100%.}, receiverPhone=Phone.MobilePhone{name='Bob's iPhone', brand='iPhone', serialNumber='86h68h6', phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, ownerPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, battery=Lithium Ion battery, with volume of 4000 mAH, made by iPhone. Currently charged for 44%.}}
+2023-01-06 12:16:45,400 DEBUG p.MobilePhone [main] receiver isOnCall: false
+2023-01-06 12:16:45,401 DEBUG p.MobilePhone [main] receiver currentCall: null
+2023-01-06 12:16:45,402 ERROR p.StationaryPhone [main] Can not start the call, receiver phone already in another call!
+2023-01-06 12:16:45,403 DEBUG p.StationaryPhone [main] isOnCall: false
+2023-01-06 12:16:45,405 DEBUG p.StationaryPhone [main] currentCall: null
+2023-01-06 12:16:45,410 TRACE p.MobilePhone [main] <Alice's S22>: Call Ended
+2023-01-06 12:16:45,412 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:16:45,414 TRACE p.MobilePhone [main] <Alice's S22>: Call start date: 2023-01-06
+2023-01-06 12:16:45,415 TRACE p.MobilePhone [main] <Alice's S22>: Caller number: + 1 1 054565465
+2023-01-06 12:16:45,416 TRACE p.MobilePhone [main] <Alice's S22>: Receiver number: + 20 577 4534563456
+2023-01-06 12:16:45,418 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call started
+2023-01-06 12:16:45,419 TRACE p.StationaryPhone [main] <null-ST-null>: PhoneData.Call start date: 2023-01-06
+2023-01-06 12:16:45,421 TRACE p.StationaryPhone [main] <null-ST-null>: Caller number: + 995 56 8383388
+2023-01-06 12:16:45,422 TRACE p.StationaryPhone [main] <null-ST-null>: Receiver number: + 20 577 4534563456
+2023-01-06 12:16:45,423 TRACE p.StationaryPhone [main] <null-ST-null>: . . . 
+2023-01-06 12:16:45,425 TRACE p.MobilePhone [main] <Bob's iPhone>: Message sent
+2023-01-06 12:16:45,426 TRACE p.MobilePhone [main] <Bob's iPhone>: Message send date: 2023-01-06
+2023-01-06 12:16:45,427 TRACE p.MobilePhone [main] <Bob's iPhone>: Sender number: + 20 577 4534563456
+2023-01-06 12:16:45,427 TRACE p.MobilePhone [main] <Bob's iPhone>: Receiver number: + 1 1 054565465
+2023-01-06 12:16:45,428 TRACE p.MobilePhone [main] <Bob's iPhone>: Message text: Hi, will call after lecture.
+2023-01-06 12:16:45,429 TRACE Main [main] Change battery for phone1.
+2023-01-06 12:16:45,430 TRACE Main [main] phone1 old battery: Lithium Polymer battery, with volume of 3000 mAH, made by Samsung. Currently charged for 99%.
+2023-01-06 12:16:45,430 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery change successful
+2023-01-06 12:16:45,431 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery type: LIION
+2023-01-06 12:16:45,431 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery brand: Samsung
+2023-01-06 12:16:45,432 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery capacity: 2000
+2023-01-06 12:16:45,432 TRACE p.MobilePhone [main] <Alice's S22>: PhoneParts.Battery current life: 100
+2023-01-06 12:16:45,432 TRACE Main [main] phone1 new battery: Lithium Ion battery, with volume of 2000 mAH, made by Samsung. Currently charged for 100%.
+2023-01-06 12:16:45,434 TRACE p.MobilePhone [main] <Bob's iPhone>: Phone.Phone charged
+2023-01-06 12:16:45,434 TRACE p.MobilePhone [main] <Bob's iPhone>: Charging time: 10
+2023-01-06 12:16:45,435 TRACE p.MobilePhone [main] <Bob's iPhone>: Battery current life: 52
+2023-01-06 12:16:45,435 TRACE Main [main] Get phone1 call log
+2023-01-06 12:16:45,437 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 12:16:45,437 TRACE Main [main] Get phone2 call log
+2023-01-06 12:16:45,439 TRACE Main [main] + 1 1 054565465 TO + 20 577 4534563456
+2023-01-06 12:16:45,440 TRACE Main [main] Get phone3 call log
+2023-01-06 12:16:45,453 TRACE Main [main] Total weight of phones: 216.8 g
+2023-01-06 12:16:45,454 TRACE Main [main] Both phones have sufficient battery life.
+2023-01-06 12:16:45,454 ERROR p.MobilePhone [main] Can not start the call, caller phone already in another call!
+2023-01-06 12:16:45,454 DEBUG p.MobilePhone [main] isOnCall: true
+2023-01-06 12:16:45,462 DEBUG p.MobilePhone [main] currentCall: PhoneData.Call{callerNumber=Number{countryCode=GEORGIA, brand='Beeline', index='56', number='8383388'}, receiverNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, callerPerson=Person.Person{firstName='Tom', lastName='Black', idNumber='987654', birthDate=null, phoneNumber=Number{countryCode=GEORGIA, brand='Beeline', index='56', number='8383388'}}, receiverPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, callerPhone=Phone.StationaryPhone{keyboard=nullbrand=nullowner=Person.Person{firstName='Tom', lastName='Black', idNumber='987654', birthDate=null, phoneNumber=Number{countryCode=GEORGIA, brand='Beeline', index='56', number='8383388'}}keyboard=null, hasWire=false}, receiverPhone=Phone.MobilePhone{name='Bob's iPhone', brand='iPhone', serialNumber='86h68h6', phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}, ownerPerson=Person.Person{firstName='Bob', lastName='Peterson', idNumber='2345677654', birthDate=null, phoneNumber=Number{countryCode=EGYPT, brand='Verizon', index='577', number='4534563456'}}, battery=Lithium Ion battery, with volume of 4000 mAH, made by iPhone. Currently charged for 52%.}}
+2023-01-06 12:16:45,463 DEBUG p.MobilePhone [main] receiver isOnCall: false
+2023-01-06 12:16:45,463 DEBUG p.MobilePhone [main] receiver currentCall: null
+2023-01-06 12:16:45,463 TRACE Main [main] END simulation of the Phone app....
