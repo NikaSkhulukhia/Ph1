@@ -1,0 +1,17 @@
+-- -----------------------------------------------------
+-- Schema mydb
+-- This small business model utilizes the MySQL database provided in the script to manage a car service company. 
+-- The database includes tables for "Users", "Car_brands", "Brand_models", and "Cars", which represent customers, car brands, car models, 
+-- and the cars themselves respectively. The "Users" table stores customer information such as their name, id number and phone number. 
+-- The "Car_brands" and "Brand_models" tables store information about the different car brands and models available.
+--  The "Cars" table stores information about the cars, including the year and the customer and car brand and model. 
+--  This database can be used to track customer information, car inventory, and service history. 
+--  Additionally, it has foreign key constraints that ensure referential integrity and cascading actions when related records are deleted or updated.
+-- In addition to the tables described above, this MySQL database also include tables for "Service_Orders" and "Shop_Orders" to manage service and shop orders respectively.
+-- The "Service_Orders" table store information about service orders such as the customer's name, the car being serviced, the service being performed,
+--  and the date of the service. It also have foreign key constraints linking it to the "Users" and "Cars" tables.
+-- The "Shop_Orders" table store information about shop orders such as the customer's name, the car parts being purchased, the quantity of each part, 
+-- and the date of the order. It also have foreign key constraints linking it to the "Users" table.
+-- These additional tables allow the company to keep track of service and shop orders and retrieve the relevant information in a structured way. 
+-- This will help in providing better services to customers and keeping track of inventory and parts.
+-- -----------------------------------------------------

@@ -1,0 +1,10 @@
+UPDATE mydb.Users SET first_name = 'John', last_name = 'Doe' WHERE id = 1;
+UPDATE mydb.Car_brands SET name = 'Brand A' WHERE id = 1;
+UPDATE mydb.Brand_models SET name = 'Model 1.1' WHERE id = 1;
+UPDATE mydb.Cars SET year = '2018-01-01' WHERE id = 1;
+UPDATE mydb.Car_part_categories SET name = 'Category A' WHERE id = 1;
+UPDATE mydb.Shops SET address = 'Address 1' WHERE id = 1;
+UPDATE mydb.Car_parts SET price = '100.00' WHERE id = 1;
+UPDATE mydb.Service_stations SET name = 'Service Station A' WHERE id = 1;
+UPDATE mydb.Shop_orders SET date = '2022-07-01 12:00:00' WHERE id = 1;
+UPDATE mydb.Service_orders SET date = '2022-08-01 14:00:00' WHERE id = 1;
